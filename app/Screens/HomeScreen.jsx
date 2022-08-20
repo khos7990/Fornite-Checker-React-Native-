@@ -12,10 +12,11 @@ export default function Welcome() {
   const [PlayerSearch, onChangeText] = useState();
   const [Player, setPlayer] = useState();
   const [PlayerLvl, setPlayerLvl] = useState();
-  const [GameMode, setGameMode] = useState("Solo");
+  const [GameMode, setGameMode] = useState("solo");
+  const [Allstats, setAllStats] = useState();
 
-  const getGameMode = (e) => {
-    console.log(e.target);
+  const getGameMode = async (e, game) => {
+    setGameMode(game);
   };
 
   const getPlayer = async () => {
@@ -33,6 +34,7 @@ export default function Welcome() {
       let results = await response.json();
       console.log(results.data);
       setPlayerLvl(results.data.battlePass.level);
+      setAllStats(results.data.stats.all);
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +48,7 @@ export default function Welcome() {
           placeholder="AccountID"
           style={styles.input}
         />
-        <Button onPress={getPlayer} title="submit"></Button>
+        <Button name="hello" onPress={getPlayer} title="submit"></Button>
       </View>
       <View style={styles.StatsContainer}>
         <Text style={styles.searchText}>{Player}</Text>
@@ -54,10 +56,21 @@ export default function Welcome() {
           <Text style={styles.searchText}>Level: {PlayerLvl} </Text>
         ) : null}
         <View style={styles.NavContainer}>
-          <Button title="Solo" />
-          <Button title="Duo" />
-          <Button title="Squad" />
+          <Button onPress={(e) => getGameMode(e, "solo")} title={"Solo"} />
+          <Button onPress={(e) => getGameMode(e, "duo")} title={"Duo"} />
+          <Button onPress={(e) => getGameMode(e, "squad")} title={"Squad"} />
         </View>
+        {Allstats ? (
+          <View style={styles.dataContainer}>
+            <Text>{GameMode}</Text>
+            <Text>Score: {Allstats[GameMode].score}</Text>
+            <Text>Kills: {Allstats[GameMode].kills}</Text>
+            <Text>Deaths: {Allstats[GameMode].deaths}</Text>
+            <Text>KD: {Allstats[GameMode].kd}</Text>
+            <Text>Matches: {Allstats[GameMode].matches}</Text>
+            <Text>Wins: {Allstats[GameMode].wins}</Text>
+          </View>
+        ) : null}
       </View>
     </View>
   );
@@ -103,5 +116,10 @@ const styles = StyleSheet.create({
     flex: 0.08,
     flexDirection: "row",
     justifyContent: "space-evenly",
+  },
+  dataContainer: {
+    flex: 1,
+    border: "2px solid black",
+    width: "90%",
   },
 });
