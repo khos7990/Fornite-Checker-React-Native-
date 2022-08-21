@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import { StyleSheet, View, ImageBackground, TextInput } from "react-native";
 import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  TextInput,
+  Card,
+  Appbar,
   Button,
-} from "react-native";
+  Title,
+  Text,
+  Searchbar,
+} from "react-native-paper";
 
 export default function Welcome() {
   const [PlayerSearch, onChangeText] = useState();
@@ -40,45 +41,119 @@ export default function Welcome() {
     }
   };
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      style={styles.imagecontainer}
+      source={require("../../assets/statsbgrnd.jpg")}
+    >
       <View style={styles.search}>
         <Text style={styles.searchText}>Search a player</Text>
         <TextInput
           onChangeText={onChangeText}
-          placeholder="AccountID"
+          placeholder="Enter an account name"
+          placeholderTextColor={"orange"}
           style={styles.input}
         />
-        <Button name="hello" onPress={getPlayer} title="submit"></Button>
+        <Button style={styles.submitBtn} onPress={getPlayer} mode="outlined">
+          {" "}
+          Submit
+        </Button>
       </View>
+
       <View style={styles.StatsContainer}>
         <Text style={styles.searchText}>{Player}</Text>
         {PlayerLvl ? (
           <Text style={styles.searchText}>Level: {PlayerLvl} </Text>
         ) : null}
         <View style={styles.NavContainer}>
-          <Button onPress={(e) => getGameMode(e, "solo")} title={"Solo"} />
-          <Button onPress={(e) => getGameMode(e, "duo")} title={"Duo"} />
-          <Button onPress={(e) => getGameMode(e, "squad")} title={"Squad"} />
+          <Appbar.Header style={styles.header}>
+            <Button
+              style={styles.NavBtn}
+              onPress={(e) => getGameMode(e, "solo")}
+              mode="contained"
+            >
+              Solo
+            </Button>
+            <Button
+              style={styles.NavBtn}
+              onPress={(e) => getGameMode(e, "duo")}
+              mode="contained"
+            >
+              Duo
+            </Button>
+            <Button
+              style={styles.NavBtn}
+              onPress={(e) => getGameMode(e, "squad")}
+              mode="contained"
+            >
+              Squad
+            </Button>
+          </Appbar.Header>
         </View>
         {Allstats ? (
           <View style={styles.dataContainer}>
-            <Text>{GameMode}</Text>
-            <Text>Score: {Allstats[GameMode].score}</Text>
-            <Text>Kills: {Allstats[GameMode].kills}</Text>
-            <Text>Deaths: {Allstats[GameMode].deaths}</Text>
-            <Text>KD: {Allstats[GameMode].kd}</Text>
-            <Text>Matches: {Allstats[GameMode].matches}</Text>
-            <Text>Wins: {Allstats[GameMode].wins}</Text>
+            <Card style={styles.card} elevation={3} mode={"elevated"}>
+              <Card.Title titleVariant="displaySmall" title={GameMode} />
+              <Card.Content>
+                <Text style={styles.cardText} variant="headlineMedium">
+                  Score:
+                  <Text style={styles.cardText} variant="headlineSmall">
+                    {" "}
+                    {Allstats[GameMode].score}{" "}
+                  </Text>
+                </Text>
+              </Card.Content>
+            </Card>
+            <Card elevation={3} mode={"elevated"}>
+              <Card.Content>
+                <Text style={styles.cardText} variant="headlineMedium">
+                  Kills:
+                  <Text variant="headlineMedium" style={styles.cardText}>
+                    {Allstats[GameMode].kills}{" "}
+                  </Text>{" "}
+                </Text>
+                <Text variant="headlineMedium" style={styles.cardText}>
+                  Deaths:
+                  <Text variant="headlineMedium" style={styles.cardText}>
+                    {" "}
+                    {Allstats[GameMode].deaths}
+                  </Text>
+                </Text>
+              </Card.Content>
+            </Card>
+            <Card elevation={3} mode={"elevated"}>
+              <Card.Content>
+                <Text variant="headlineMedium" style={styles.cardText}>
+                  Matches:{" "}
+                  <Text variant="headlineMedium" style={styles.cardText}>
+                    {Allstats[GameMode].matches}{" "}
+                  </Text>
+                  Wins:{" "}
+                  <Text style={styles.cardText} variant="headlineMedium">
+                    {Allstats[GameMode].wins}
+                  </Text>
+                </Text>
+              </Card.Content>
+            </Card>
+            <Card elevation={3} mode={"elevated"}>
+              <Card.Content>
+                <Text style={styles.cardText} variant="headlineMedium">
+                  KD:
+                  <Text style={styles.cardText} variant="headlineMedium">
+                    {" "}
+                    {Allstats[GameMode].kd}
+                  </Text>
+                </Text>
+              </Card.Content>
+            </Card>
           </View>
         ) : null}
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#6C27F8",
+  imagecontainer: {
     flex: 1,
     width: "100%",
     alignItems: "center",
@@ -87,39 +162,68 @@ const styles = StyleSheet.create({
 
   search: {
     border: "2px solid orange",
-    width: "90%",
-    height: "20%",
+    width: "100%",
+    height: "25%",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
   },
 
   StatsContainer: {
-    border: "2px solid yellow",
-    height: "75%",
+    border: "2px solid white",
+    top: "5%",
+    height: "70%",
     width: "100%",
     alignItems: "center",
   },
 
   searchText: {
-    fontSize: "40px",
+    fontSize: "30px",
     color: "yellow",
   },
   input: {
-    width: "100%",
-    color: "orange",
-    border: "2px solid orange",
-    height: "20%",
+    width: "75%",
+    textAlign: "center",
+    border: "2px solid yellow",
+    height: "25%",
+    color: "yellow",
+    fontSize: 25,
   },
+  searchInput: {
+    color: "white",
+  },
+
   NavContainer: {
     width: "100%",
     border: "red 2px solid",
     flex: 0.08,
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    position: "relative",
+    alignItems: "center",
   },
+
   dataContainer: {
     flex: 1,
     border: "2px solid black",
     width: "90%",
+  },
+
+  NavBtn: {},
+
+  submitBtn: {
+    border: "2px solid orange",
+  },
+
+  card: {
+    border: "2px solid black",
+  },
+
+  cardText: {
+    color: "#40C81B",
+  },
+  header: {
+    border: "2px solid pink",
+    width: "100%",
+    padding: 0,
+    justifyContent: "space-evenly",
   },
 });
