@@ -22,13 +22,13 @@ export default function LoginScreen({ navigation }) {
         <View style={styles.welcomeContainer}>
           <Text style={styles.title}>Fortnite Tracker</Text>
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.loginBtnContainer}
           height="100%"
           onPress={() => navigation.navigate("Home")}
         >
           <Text style={styles.loginBtn}>Continue to Track</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </ImageBackground>
     </View>
   );
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   },
   welcomeContainer: {
     flex: 0.1,
+    bottom: 100,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",

@@ -8,7 +8,7 @@ import {
   Text,
   Searchbar,
 } from "react-native-paper";
-
+import BottomNav from "../Components/BottomNav";
 export default function Welcome() {
   const [PlayerSearch, onChangeText] = useState();
   const [Player, setPlayer] = useState();
@@ -102,8 +102,7 @@ export default function Welcome() {
                   </Text>
                 </Text>
               </Card.Content>
-            </Card>
-            <Card elevation={3} mode={"elevated"}>
+
               <Card.Content>
                 <Text style={styles.cardText} variant="headlineMedium">
                   Kills:
@@ -119,8 +118,7 @@ export default function Welcome() {
                   </Text>
                 </Text>
               </Card.Content>
-            </Card>
-            <Card elevation={3} mode={"elevated"}>
+
               <Card.Content>
                 <Text variant="headlineMedium" style={styles.cardText}>
                   Matches:{" "}
@@ -133,8 +131,7 @@ export default function Welcome() {
                   </Text>
                 </Text>
               </Card.Content>
-            </Card>
-            <Card elevation={3} mode={"elevated"}>
+
               <Card.Content>
                 <Text style={styles.cardText} variant="headlineMedium">
                   KD:
@@ -215,6 +212,7 @@ const styles = StyleSheet.create({
 
   card: {
     border: "2px solid black",
+    backgroundColor: "white",
   },
 
   cardText: {
