@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, ImageBackground, TextInput } from "react-native";
 import {
   Card,
@@ -15,6 +15,17 @@ export default function Welcome() {
   const [PlayerLvl, setPlayerLvl] = useState();
   const [GameMode, setGameMode] = useState("solo");
   const [Allstats, setAllStats] = useState();
+  const [CardTitleColor, setCardTitleColor] = useState("#20C7DE");
+
+  useEffect(() => {
+    if (GameMode === "solo") {
+      setCardTitleColor("#2D7CF5");
+    } else if (GameMode === "duo") {
+      setCardTitleColor("#FF9E43");
+    } else {
+      setCardTitleColor("#852DF5");
+    }
+  }, [GameMode]);
 
   const getGameMode = async (e, game) => {
     setGameMode(game);
@@ -60,10 +71,6 @@ export default function Welcome() {
       </View>
 
       <View style={styles.StatsContainer}>
-        <Text style={styles.searchText}>{Player}</Text>
-        {PlayerLvl ? (
-          <Text style={styles.searchText}>Level: {PlayerLvl} </Text>
-        ) : null}
         <View style={styles.NavContainer}>
           <Appbar.Header style={styles.header}>
             <Button
@@ -89,10 +96,39 @@ export default function Welcome() {
             </Button>
           </Appbar.Header>
         </View>
+        <View style={styles.PlayerContainer}>
+          {PlayerLvl ? (
+            <>
+              <Text style={styles.PlayerLvlText}>Level: {PlayerLvl} </Text>
+              <Text style={styles.PlayerText}>{Player}</Text>
+            </>
+          ) : null}
+        </View>
         {Allstats ? (
           <View style={styles.dataContainer}>
             <Card style={styles.card} elevation={3} mode={"elevated"}>
-              <Card.Title titleVariant="displaySmall" title={GameMode} />
+              <View
+                style={{
+                  backgroundColor: CardTitleColor,
+                  border: "2px solid green",
+                  position: "relative",
+                }}
+              >
+                <Card.Title
+                  titleVariant="displaySmall"
+                  title={GameMode}
+                  right={(text) => (
+                    <Text style={{ marginRight: "5%" }} variant="headlineSmall">
+                      {Allstats[GameMode].matches} Matches
+                    </Text>
+                  )}
+                />
+                {/* <Card.Title
+                  right={"50"}
+                  titleVariant="displaySmall"
+                  title={Allstats[GameMode].matches}
+                /> */}
+              </View>
               <Card.Content>
                 <Text style={styles.cardText} variant="headlineMedium">
                   Score:
@@ -167,7 +203,7 @@ const styles = StyleSheet.create({
 
   StatsContainer: {
     border: "2px solid white",
-    top: "5%",
+    top: "0%",
     height: "70%",
     width: "100%",
     alignItems: "center",
@@ -201,7 +237,8 @@ const styles = StyleSheet.create({
   dataContainer: {
     flex: 1,
     border: "2px solid black",
-    width: "90%",
+    width: "100%",
+    marginTop: "10%",
   },
 
   NavBtn: {},
@@ -213,6 +250,7 @@ const styles = StyleSheet.create({
   card: {
     border: "2px solid black",
     backgroundColor: "white",
+    height: "93%",
   },
 
   cardText: {
@@ -223,5 +261,26 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 0,
     justifyContent: "space-evenly",
+  },
+
+  PlayerContainer: {
+    marginTop: "5%",
+    border: "2px solid blue",
+    position: "relative",
+    width: "95%",
+  },
+
+  PlayerLvlText: {
+    position: "absolute",
+    left: 0,
+    fontSize: "26px",
+    color: "orange",
+  },
+
+  PlayerText: {
+    position: "absolute",
+    right: 0,
+    fontSize: "26px",
+    color: "orange",
   },
 });
