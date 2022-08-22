@@ -18,14 +18,14 @@ const theme = {
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-      <NavigationContainer>
+      <HomeScreen />
+      {/* <NavigationContainer>
         <BottomNav />
-      </NavigationContainer>
+      </NavigationContainer> */}
     </PaperProvider>
   );
 }
 
-// <HomeScreen />
 {
   /* <NavigationContainer>
   <Stack.Navigator
