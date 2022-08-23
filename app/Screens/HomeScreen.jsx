@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import CircularProgress from "react-native-circular-progress-indicator";
-import { StyleSheet, View, ImageBackground, TextInput } from "react-native";
 import {
-  Card,
-  Appbar,
-  Button,
-  Title,
-  Text,
-  Searchbar,
-} from "react-native-paper";
+  StyleSheet,
+  View,
+  ImageBackground,
+  TextInput,
+  Image,
+} from "react-native";
+import { Card, Appbar, Button, Title, Text } from "react-native-paper";
 import BottomNav from "../Components/BottomNav";
 
 export default function Welcome() {
@@ -18,7 +17,7 @@ export default function Welcome() {
   const [GameMode, setGameMode] = useState("solo");
   const [Allstats, setAllStats] = useState();
   const [CardTitleColor, setCardTitleColor] = useState("#20C7DE");
-  const [value, setValue] = useState(10);
+  const [focusColor, setfocusColor] = useState("yellow");
 
   useEffect(() => {
     if (GameMode === "solo") {
@@ -62,11 +61,22 @@ export default function Welcome() {
     >
       <View style={styles.search}>
         <Text style={styles.searchText}>Search a player</Text>
+
         <TextInput
           onChangeText={onChangeText}
           placeholder="Enter an account name"
-          placeholderTextColor={"orange"}
-          style={styles.input}
+          placeholderTextColor="orange"
+          onBlur={() => setfocusColor("yellow")}
+          onFocus={() => setfocusColor("orange")}
+          style={{
+            color: "orange",
+            borderWidth: 2,
+            width: "70%",
+            height: "30%",
+            borderRadius: 10,
+            textAlign: "center",
+            borderColor: focusColor,
+          }}
         />
         <Button style={styles.submitBtn} onPress={getPlayer} mode="outlined">
           Submit
@@ -126,98 +136,89 @@ export default function Welcome() {
                   )}
                 />
               </View>
-              {/* <Card.Content>
-                <Card style={styles.scoreCard} elevation={0}>
-                  <Text style={styles.cardText} variant="headlineMedium">
-                    Score:
-                    <Text style={styles.cardText} variant="headlineSmall">
-                      {Allstats[GameMode].score}{" "}
+
+              <Card.Content
+                style={{
+                  paddingLeft: 0,
+                  paddingRight: 0,
+                  height: "80%",
+                }}
+              >
+                <View style={styles.chartData}>
+                  <View style={styles.winsndlosses}>
+                    <Text
+                      variant="headlineSmall"
+                      style={{ color: "orange", marginBottom: "5%" }}
+                    >
+                      {" "}
+                      Wins {Allstats[GameMode].wins}
                     </Text>
-                  </Text>
-                </Card>
-              </Card.Content> */}
+                    <Text variant="headlineSmall" style={styles.text}>
+                      Losses{" "}
+                      {Allstats[GameMode].matches - Allstats[GameMode].wins}
+                    </Text>
+                  </View>
+                  <View style={styles.chartContainer}>
+                    <Text
+                      variant="headlineSmall"
+                      style={{ color: "orange", marginBottom: "5%" }}
+                    >
+                      {" "}
+                      Win Rate
+                    </Text>
+                    <CircularProgress
+                      radius={50}
+                      value={Allstats[GameMode].winRate}
+                      textColor="#F3A900"
+                      activeStrokeColor="orange"
+                      valueSuffix={"%"}
+                      inActiveStrokeColor={"orange"}
+                      inActiveStrokeOpacity={0.4}
+                      inActiveStrokeWidth={6}
+                      duration={500}
+                    />
+                  </View>
+                </View>
+                <View style={styles.matchData}>
+                  <View style={styles.kills}>
+                    <Text
+                      style={{
+                        color: "orange",
+                        border: "2px solid yellow",
+                      }}
+                      variant="headlineSmall"
+                    >
+                      {" "}
+                      Kills{" "}
+                    </Text>
+                    <Text style={styles.text} variant="headlineSmall">
+                      {" "}
+                      {Allstats[GameMode].kills}{" "}
+                    </Text>
+                  </View>
+                  <View style={styles.deaths}>
+                    <Text style={styles.text} variant="headlineSmall">
+                      {" "}
+                      Deaths{" "}
+                    </Text>
 
-              {/* <Card.Content>
-                <Text style={styles.cardText} variant="headlineMedium">
-                  Kills:
-                  <Text variant="headlineMedium" style={styles.cardText}>
-                    {Allstats[GameMode].kills}{" "}
-                  </Text>{" "}
-                </Text>
-                <Text variant="headlineMedium" style={styles.cardText}>
-                  Deaths:
-                  <Text variant="headlineMedium" style={styles.cardText}>
-                    {" "}
-                    {Allstats[GameMode].deaths}
-                  </Text>
-                </Text>
-              </Card.Content> */}
-
-              <Card.Content style={{ paddingLeft: 0, paddingRight: 0 }}>
-                <Card style={styles.scoreCard}>
-                  <Card.Content>
-                    <View style={styles.chartData}>
-                      <Text style={styles.text}>
-                        {" "}
-                        WINS {Allstats[GameMode].wins}
-                      </Text>
-                      <Text style={styles.text}>
-                        {" "}
-                        Losses{" "}
-                        {Allstats[GameMode].matches - Allstats[GameMode].wins}
-                      </Text>
-                      <Text style={styles.text}> WIN RATE</Text>
-                      <CircularProgress
-                        radius={50}
-                        value={Allstats[GameMode].winRate}
-                        textColor="#F3A900"
-                        activeStrokeColor="orange"
-                        valueSuffix={"%"}
-                        inActiveStrokeColor={"orange"}
-                        inActiveStrokeOpacity={0.4}
-                        inActiveStrokeWidth={6}
-                        duration={500}
-                      />
-                    </View>
-                    <View style={styles.matchData}>
-                      <Text style={styles.text} variant="headlineMedium">
-                        {" "}
-                        Kills{" "}
-                      </Text>
-                      <Text style={styles.text} variant="headlineSmall">
-                        {" "}
-                        {Allstats[GameMode].kills}{" "}
-                      </Text>
-                      <Text style={styles.text} variant="headlineMedium">
-                        {" "}
-                        Deaths{" "}
-                      </Text>
-                      <Text style={styles.text} variant="headlineSmall">
-                        {" "}
-                        {Allstats[GameMode].deaths}
-                      </Text>
-                      <Text style={styles.text} variant="headlineMedium">
-                        {" "}
-                        KD{" "}
-                      </Text>
-                      <Text style={styles.text} variant="headlineSmall">
-                        {" "}
-                        {Allstats[GameMode].kd}
-                      </Text>
-                    </View>
-                  </Card.Content>
-                </Card>
+                    <Text style={styles.text} variant="headlineSmall">
+                      {" "}
+                      {Allstats[GameMode].deaths}
+                    </Text>
+                  </View>
+                  <View style={styles.kd}>
+                    <Text style={styles.text} variant="headlineSmall">
+                      {" "}
+                      KD{" "}
+                    </Text>
+                    <Text style={styles.text} variant="headlineSmall">
+                      {" "}
+                      {Allstats[GameMode].kd}
+                    </Text>
+                  </View>
+                </View>
               </Card.Content>
-
-              {/* <Card.Content>
-                <Text style={styles.cardText} variant="headlineMedium">
-                  KD:
-                  <Text style={styles.cardText} variant="headlineMedium">
-                    {" "}
-                    {Allstats[GameMode].kd}
-                  </Text>
-                </Text>
-              </Card.Content> */}
             </Card>
           </View>
         ) : null}
@@ -227,27 +228,40 @@ export default function Welcome() {
 }
 
 const styles = StyleSheet.create({
-  matchData: {
-    border: "2px solid pink",
-    height: "100%",
-    width: "30%",
-    position: "absolute",
-    justifyContent: "center",
-    alignItems: "center",
-    right: 40,
-  },
-  chartData: {
-    width: "30%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+  kills: {
     border: "2px solid blue",
   },
-  scoreCard: {
+  chartContainer: {
+    marginLeft: "20%",
+  },
+  winsndlosses: {
+    marginTop: "15%",
+    height: "60%",
+  },
+  matchData: {
+    border: "2px solid pink",
+    height: "75%",
+    width: "100%",
+    position: "absolute",
+    justifyContent: "space-around",
+    alignItems: "center",
+    bottom: 0,
+    flexDirection: "row",
+  },
+  chartData: {
+    width: "100%",
+    height: "50%",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    flexDirection: "row",
     border: "2px solid red",
+  },
+  scoreCard: {
     flexDirection: "row",
     backgroundColor: "transparent",
     width: "100%",
+    height: "100%",
     position: "relative",
     height: "90%",
   },
@@ -259,7 +273,6 @@ const styles = StyleSheet.create({
   },
 
   search: {
-    border: "2px solid orange",
     width: "100%",
     height: "25%",
     alignItems: "center",
@@ -267,7 +280,6 @@ const styles = StyleSheet.create({
   },
 
   StatsContainer: {
-    border: "2px solid white",
     top: "0%",
     height: "70%",
     width: "100%",
@@ -281,7 +293,6 @@ const styles = StyleSheet.create({
   input: {
     width: "75%",
     textAlign: "center",
-    border: "2px solid yellow",
     height: "25%",
     color: "yellow",
     fontSize: 25,
@@ -292,7 +303,6 @@ const styles = StyleSheet.create({
 
   NavContainer: {
     width: "100%",
-    border: "red 2px solid",
     flex: 0.08,
     flexDirection: "row",
     position: "relative",
@@ -301,7 +311,6 @@ const styles = StyleSheet.create({
 
   dataContainer: {
     flex: 1,
-    border: "2px solid yellow",
     width: "100%",
     marginTop: "10%",
   },
@@ -309,20 +318,20 @@ const styles = StyleSheet.create({
   NavBtn: {},
 
   submitBtn: {
-    border: "2px solid orange",
+    borderWidth: 2,
+    borderColor: "orange",
   },
 
   card: {
-    border: "2px solid black",
     backgroundColor: "#171717",
     height: "100%",
+    border: "2px solid green",
   },
 
   cardText: {
     color: "#40C81B",
   },
   header: {
-    border: "2px solid pink",
     width: "100%",
     padding: 0,
     justifyContent: "space-evenly",
@@ -330,7 +339,6 @@ const styles = StyleSheet.create({
 
   PlayerContainer: {
     marginTop: "5%",
-    border: "2px solid blue",
     position: "relative",
     width: "95%",
   },
