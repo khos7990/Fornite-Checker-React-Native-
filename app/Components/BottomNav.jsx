@@ -17,11 +17,11 @@ export default function BottomNav() {
         tabBarStyle: {
           position: "absolute",
           bottom: 10,
-          borderRadius: 10,
+          borderRadius: 5,
           backgroundColor: "#6C27F8",
           height: 80,
-          right: 10,
-          left: 10,
+          right: 5,
+          left: 5,
         },
       }}
     >

@@ -18,10 +18,9 @@ const theme = {
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-      <HomeScreen />
-      {/* <NavigationContainer>
+      <NavigationContainer>
         <BottomNav />
-      </NavigationContainer> */}
+      </NavigationContainer>
     </PaperProvider>
   );
 }

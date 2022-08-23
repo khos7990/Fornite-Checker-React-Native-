@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CircularProgress from "react-native-circular-progress-indicator";
+import { CircularProgressBase } from "react-native-circular-progress-indicator";
+
 import {
   StyleSheet,
   View,
@@ -17,15 +19,28 @@ export default function Welcome() {
   const [GameMode, setGameMode] = useState("solo");
   const [Allstats, setAllStats] = useState();
   const [CardTitleColor, setCardTitleColor] = useState("#20C7DE");
-  const [focusColor, setfocusColor] = useState("yellow");
+  const [focusColor, setfocusColor] = useState("orange");
+  const [BtnColorSolo, setBtnSoloColor] = useState("orange");
+  const [BtnColorDuo, setBtnDuoColor] = useState("orange");
+  const [BtnColorSquad, setBtnSquadColor] = useState("orange");
+  const [clickedBtn, setclickedBtn] = useState("#852DF5");
 
   useEffect(() => {
     if (GameMode === "solo") {
       setCardTitleColor("#2D7CF5");
+      setBtnSoloColor("#852DF5");
+      setBtnDuoColor("orange");
+      setBtnSquadColor("orange");
     } else if (GameMode === "duo") {
       setCardTitleColor("#FF9E43");
+      setBtnDuoColor("#852DF5");
+      setBtnSoloColor("orange");
+      setBtnSquadColor("orange");
     } else {
       setCardTitleColor("#852DF5");
+      setBtnSquadColor("#852DF5");
+      setBtnSoloColor("orange");
+      setBtnDuoColor("orange");
     }
   }, [GameMode]);
 
@@ -64,10 +79,10 @@ export default function Welcome() {
 
         <TextInput
           onChangeText={onChangeText}
-          placeholder="Enter an account name"
+          placeholder="Account name"
           placeholderTextColor="orange"
-          onBlur={() => setfocusColor("yellow")}
-          onFocus={() => setfocusColor("orange")}
+          onBlur={() => setfocusColor("orange")}
+          onFocus={() => setfocusColor("#852DF5")}
           style={{
             color: "orange",
             borderWidth: 2,
@@ -76,6 +91,7 @@ export default function Welcome() {
             borderRadius: 10,
             textAlign: "center",
             borderColor: focusColor,
+            fontSize: "30%",
           }}
         />
         <Button style={styles.submitBtn} onPress={getPlayer} mode="outlined">
@@ -87,6 +103,9 @@ export default function Welcome() {
         <View style={styles.NavContainer}>
           <Appbar.Header style={styles.header}>
             <Button
+              labelStyle={{ fontSize: "20%" }}
+              buttonColor={BtnColorSolo}
+              textColor="black"
               style={styles.NavBtn}
               onPress={(e) => getGameMode(e, "solo")}
               mode="contained"
@@ -94,6 +113,8 @@ export default function Welcome() {
               Solo
             </Button>
             <Button
+              labelStyle={{ fontSize: "20%" }}
+              buttonColor={BtnColorDuo}
               style={styles.NavBtn}
               onPress={(e) => getGameMode(e, "duo")}
               mode="contained"
@@ -101,6 +122,8 @@ export default function Welcome() {
               Duo
             </Button>
             <Button
+              labelStyle={{ fontSize: "20%" }}
+              buttonColor={BtnColorSquad}
               style={styles.NavBtn}
               onPress={(e) => getGameMode(e, "squad")}
               mode="contained"
@@ -119,9 +142,21 @@ export default function Welcome() {
         </View>
         {Allstats ? (
           <View style={styles.dataContainer}>
-            <Card style={styles.card} elevation={3} mode={"elevated"}>
+            <Card
+              style={{
+                backgroundColor: "transparent",
+                height: "100%",
+                borderWidth: 5,
+                borderColor: CardTitleColor,
+                borderBottomWidth: 0,
+              }}
+              elevation={3}
+              mode={"elevated"}
+            >
               <View
                 style={{
+                  borderWidth: 5,
+                  borderColor: "black",
                   backgroundColor: CardTitleColor,
                   position: "relative",
                 }}
@@ -170,9 +205,10 @@ export default function Welcome() {
                       radius={50}
                       value={Allstats[GameMode].winRate}
                       textColor="#F3A900"
-                      activeStrokeColor="orange"
+                      activeStrokeColor={"#2465FD"}
+                      activeStrokeSecondaryColor={"#C25AFF"}
                       valueSuffix={"%"}
-                      inActiveStrokeColor={"orange"}
+                      inActiveStrokeColor={"#9B52F7"}
                       inActiveStrokeOpacity={0.4}
                       inActiveStrokeWidth={6}
                       duration={500}
@@ -235,7 +271,7 @@ const styles = StyleSheet.create({
     marginLeft: "20%",
   },
   winsndlosses: {
-    marginTop: "15%",
+    marginTop: "6%",
     height: "60%",
   },
   matchData: {
@@ -315,7 +351,10 @@ const styles = StyleSheet.create({
     marginTop: "10%",
   },
 
-  NavBtn: {},
+  NavBtn: {
+    borderWidth: 2,
+    borderColor: "#852DF5",
+  },
 
   submitBtn: {
     borderWidth: 2,
@@ -323,9 +362,10 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor: "#171717",
-    height: "100%",
-    border: "2px solid green",
+    // backgroundColor: "transparent",
+    // height: "100%",
+    // borderWidth: 5,
+    // borderBottomWidth: 0,
   },
 
   cardText: {
