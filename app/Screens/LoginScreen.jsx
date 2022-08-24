@@ -20,40 +20,17 @@ const imageH = imageW * 1.54;
 export default function LoginScreen({ navigation }) {
   const [newsData, setNewsData] = useState([]);
   const [dailyItems, setdailyItems] = useState([]);
-  const [items, setItems] = useState([]);
-  const [itemsImg, setitemsImg] = useState([]);
+  const [singleItems, setsingleItems] = useState([]);
+  const [ItemsMoreThanOne, setItemsMoreThanOne] = useState([]);
 
   useEffect(() => {
     getNewsData();
+    getStore();
   }, []);
 
   useEffect(() => {
-    let itemArr = [];
-    let imgs = [];
-    for (let i = 0; i < dailyItems.length; i++) {
-      itemArr.push(dailyItems[i].items);
-    }
-    setItems(itemArr);
+    items();
   }, [dailyItems]);
-
-  useEffect(() => {
-    let data = [];
-    const obj = {};
-    for (let i = 0; i < items.length; i++) {
-      let name = items[i][0].name;
-      let description = items[i][0].description;
-      let images = items[i][0].images.icon;
-      obj[i] = {
-        name: name,
-        des: description,
-        img: images,
-      };
-      data.push(obj[i]);
-    }
-    console.log(obj);
-    console.log(data);
-    setitemsImg(data);
-  }, [items]);
 
   const getNewsData = async () => {
     try {
@@ -82,10 +59,33 @@ export default function LoginScreen({ navigation }) {
         }
       );
       let results = await response.json();
-      setdailyItems(results.data.daily.entries);
+      let arrOfItems = [];
+      results.data.daily.entries.map((item) => {
+        arrOfItems.push(item.items);
+      });
+      setdailyItems(arrOfItems);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const items = () => {
+    let arrOne = [];
+    let two = [];
+
+    dailyItems.map((item) => {
+      if (item.length > 1) {
+        for (let i = 0; i < item.length; i++) {
+          two.push(item[i]);
+          setItemsMoreThanOne(two);
+        }
+      } else {
+        for (let i = 0; i < item.length; i++) {
+          arrOne.push(item[i]);
+          setsingleItems(arrOne);
+        }
+      }
+    });
   };
 
   return (
@@ -95,25 +95,6 @@ export default function LoginScreen({ navigation }) {
         style={styles.background}
         source={require("../../assets/statsbgrnd.jpg")}
       >
-        {/* <View
-          style={{
-            height: "10%",
-            width: "100%",
-            position: "absolute",
-            top: 45,
-          }}
-        >
-          <Text
-            style={{
-              color: "yellow",
-              fontSize: 40,
-              textAlign: "center",
-            }}
-          >
-            {" "}
-            News{" "}
-          </Text>
-        </View> */}
         {newsData ? (
           <SafeAreaView style={styles.cardContainer}>
             <FlatList
@@ -125,7 +106,6 @@ export default function LoginScreen({ navigation }) {
                 return (
                   <View
                     style={{
-                      border: "2px solid yellow",
                       width: width,
                       bottom: 0,
                       justifyContent: "flex-end",
@@ -158,7 +138,6 @@ export default function LoginScreen({ navigation }) {
             />
             <View
               style={{
-                border: "2px solid green",
                 height: 70,
               }}
             >
@@ -180,7 +159,7 @@ export default function LoginScreen({ navigation }) {
             </View>
           </SafeAreaView>
         ) : null}
-        {/* <View
+        <View
           style={{
             borderWidth: 1,
             borderColor: "orange",
@@ -188,60 +167,45 @@ export default function LoginScreen({ navigation }) {
             marginBottom: 90,
             width: "100%",
           }}
+        >
+          <View style={{ border: "2px solid yellow" }}>
+            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
+              Dailys
+            </Text>
+          </View>
+          <View
+            style={{
+              border: "2px solid green",
+              height: 250,
+              flexDirection: "row",
+              flexWrap: "wrap",
+            }}
           >
-          {items ? (
-            <FlatList
-            data={itemsImg}
-            horizontal
-            pagingEnabled
-            renderItem={({ item }) => {
-              return (
-                <View
+            {singleItems.map((item) => (
+              <View
                 style={{
-                  width: width,
-                  height: "90%",
-                  marginTop: 0,
-                  justifyContent: "center",
-                  alignItems: "center",
+                  border: "2px solid red",
+                  width: 120,
+                  height: 120,
                 }}
-                >
+              >
                 <Text
-                style={{
-                  color: "white",
-                  fontSize: 40,
-                  textAlign: "center",
-                }}
+                  style={{ fontSize: 15, color: "white", textAlign: "center" }}
                 >
-                {item.name}
+                  {item.name}
                 </Text>
-                
-                    <Text
-                    style={{
-                      color: "white",
-                      fontSize: 20,
-                      textAlign: "center",
-                    }}
-                    >
-                    {item.des}
-                    </Text>
-                    <Image
-                    source={{ uri: item.img }}
-                    style={{
-                      width: imageW,
-                      height: 150,
-                      resizeMode: "contain",
-                      borderWidth: "2",
-                      borderColor: "white",
-                      borderRadius: 15,
-                    }}
-                    />
-                    </View>
-                    );
+                <Image
+                  source={{ uri: item.images.smallIcon }}
+                  style={{
+                    width: 100,
+                    height: 100,
+                    resizeMode: "center",
                   }}
-                  />
-                  ) : null}
-                  <Button onPress={getStore} title="press" />
-                </View> */}
+                />
+              </View>
+            ))}
+          </View>
+        </View>
       </ImageBackground>
     </View>
   );
@@ -267,6 +231,5 @@ const styles = StyleSheet.create({
     height: "45%",
     top: 0,
     position: "absolute",
-    border: "2px solid red",
   },
 });
