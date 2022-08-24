@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,29 +6,92 @@ import {
   Button,
   Alert,
   ImageBackground,
-  TouchableOpacity,
+  FlatList,
+  Image,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { Card } from "react-native-paper";
 import { SafeAreaView } from "react-native";
+import { Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get("screen");
+const imageW = width * 0.7;
+const imageH = imageW * 1.54;
 
 export default function LoginScreen({ navigation }) {
+  const [newsData, setNewsData] = useState([]);
+
+  useEffect(async () => {
+    try {
+      let response = await fetch("https://fortnite-api.com/v2/news/br", {
+        method: "GET",
+        headers: {
+          Authorization: "c7ed655d-7550-4737-9791-2a0b3ab588cd",
+        },
+      });
+      let results = await response.json();
+      setNewsData(results.data.motds);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
   return (
     <View style={styles.container}>
       <ImageBackground
         resizeMode="cover"
         style={styles.background}
-        source={require("../../assets/fortnite.jpg")}
+        source={require("../../assets/statsbgrnd.jpg")}
       >
-        <View style={styles.welcomeContainer}>
-          <Text style={styles.title}>Fortnite Tracker</Text>
-        </View>
-        {/* <TouchableOpacity
-          style={styles.loginBtnContainer}
-          height="100%"
-          onPress={() => navigation.navigate("Home")}
-        >
-          <Text style={styles.loginBtn}>Continue to Track</Text>
-        </TouchableOpacity> */}
+        {newsData ? (
+          <SafeAreaView style={styles.cardContainer}>
+            <FlatList
+              data={newsData}
+              keyExtractor={(item) => item.image}
+              horizontal
+              pagingEnabled
+              renderItem={({ item }) => {
+                return (
+                  <View
+                    style={{
+                      width: width,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      border: "2px solid yellow",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: "white",
+                        fontSize: 40,
+                        textAlign: "center",
+                      }}
+                    >
+                      {item.title}
+                    </Text>
+                    <Image
+                      source={{ uri: item.image }}
+                      style={{
+                        width: imageW,
+                        height: imageH,
+                        resizeMode: "cover",
+                        borderWidth: "2",
+                        borderColor: "white",
+                        borderRadius: 15,
+                      }}
+                    />
+                  </View>
+                );
+              }}
+            />
+          </SafeAreaView>
+        ) : null}
+        <View
+          style={{
+            position: "absolute",
+            border: "2px solid orange",
+            bottom: "15%",
+          }}
+        ></View>
       </ImageBackground>
     </View>
   );
@@ -38,6 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    position: "relative",
   },
   background: {
     flex: 1,
@@ -47,27 +111,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  title: {
-    color: "#E8D70A",
-    fontSize: "55px",
-  },
-  welcomeContainer: {
-    flex: 0.1,
-    bottom: 100,
+  cardContainer: {
+    border: "2px solid red",
     width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#6C27F8",
-  },
-  loginBtnContainer: {
-    width: "100%",
-    height: "12%",
-    backgroundColor: "#E8790A",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  loginBtn: {
-    color: "#6C27F8",
-    fontSize: "30px",
+    position: "relative",
+    height: "80%",
+    position: "absolute",
   },
 });
