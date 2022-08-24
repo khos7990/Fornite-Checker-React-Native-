@@ -50,6 +50,7 @@ export default function LoginScreen({ navigation }) {
       };
       data.push(obj[i]);
     }
+    console.log(obj);
     console.log(data);
     setitemsImg(data);
   }, [items]);
@@ -94,7 +95,7 @@ export default function LoginScreen({ navigation }) {
         style={styles.background}
         source={require("../../assets/statsbgrnd.jpg")}
       >
-        <View
+        {/* <View
           style={{
             height: "10%",
             width: "100%",
@@ -112,7 +113,7 @@ export default function LoginScreen({ navigation }) {
             {" "}
             News{" "}
           </Text>
-        </View>
+        </View> */}
         {newsData ? (
           <SafeAreaView style={styles.cardContainer}>
             <FlatList
@@ -124,10 +125,10 @@ export default function LoginScreen({ navigation }) {
                 return (
                   <View
                     style={{
+                      border: "2px solid yellow",
                       width: width,
-                      height: "90%",
-                      marginTop: 0,
-                      justifyContent: "center",
+                      bottom: 0,
+                      justifyContent: "flex-end",
                       alignItems: "center",
                     }}
                   >
@@ -155,9 +156,31 @@ export default function LoginScreen({ navigation }) {
                 );
               }}
             />
+            <View
+              style={{
+                border: "2px solid green",
+                height: 70,
+              }}
+            >
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: 20,
+                  flex: 1,
+                  textAlign: "center",
+                  marginLeft: 25,
+                }}
+              >
+                Swipe to see whats new{" "}
+                <Image
+                  style={{ height: 50, width: 45 }}
+                  source={require("../../assets/icons/swipe.png")}
+                />
+              </Text>
+            </View>
           </SafeAreaView>
         ) : null}
-        <View
+        {/* <View
           style={{
             borderWidth: 1,
             borderColor: "orange",
@@ -165,60 +188,60 @@ export default function LoginScreen({ navigation }) {
             marginBottom: 90,
             width: "100%",
           }}
-        >
+          >
           {items ? (
             <FlatList
-              data={itemsImg}
-              horizontal
-              pagingEnabled
-              renderItem={({ item }) => {
-                return (
-                  <View
+            data={itemsImg}
+            horizontal
+            pagingEnabled
+            renderItem={({ item }) => {
+              return (
+                <View
+                style={{
+                  width: width,
+                  height: "90%",
+                  marginTop: 0,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                >
+                <Text
+                style={{
+                  color: "white",
+                  fontSize: 40,
+                  textAlign: "center",
+                }}
+                >
+                {item.name}
+                </Text>
+                
+                    <Text
                     style={{
-                      width: width,
-                      height: "90%",
-                      marginTop: 0,
-                      justifyContent: "center",
-                      alignItems: "center",
+                      color: "white",
+                      fontSize: 20,
+                      textAlign: "center",
                     }}
-                  >
-                    <Text
-                      style={{
-                        color: "white",
-                        fontSize: 40,
-                        textAlign: "center",
-                      }}
                     >
-                      {item.name}
-                    </Text>
-
-                    <Text
-                      style={{
-                        color: "white",
-                        fontSize: 20,
-                        textAlign: "center",
-                      }}
-                    >
-                      {item.des}
+                    {item.des}
                     </Text>
                     <Image
-                      source={{ uri: item.img }}
-                      style={{
-                        width: imageW,
-                        height: 150,
-                        resizeMode: "contain",
-                        borderWidth: "2",
-                        borderColor: "white",
-                        borderRadius: 15,
-                      }}
+                    source={{ uri: item.img }}
+                    style={{
+                      width: imageW,
+                      height: 150,
+                      resizeMode: "contain",
+                      borderWidth: "2",
+                      borderColor: "white",
+                      borderRadius: 15,
+                    }}
                     />
-                  </View>
-                );
-              }}
-            />
-          ) : null}
-          <Button onPress={getStore} title="press" />
-        </View>
+                    </View>
+                    );
+                  }}
+                  />
+                  ) : null}
+                  <Button onPress={getStore} title="press" />
+                </View> */}
       </ImageBackground>
     </View>
   );
@@ -241,8 +264,9 @@ const styles = StyleSheet.create({
   cardContainer: {
     width: "100%",
     position: "relative",
-    height: "70%",
-    top: -50,
+    height: "45%",
+    top: 0,
     position: "absolute",
+    border: "2px solid red",
   },
 });
