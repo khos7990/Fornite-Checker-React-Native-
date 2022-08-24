@@ -19,8 +19,42 @@ const imageH = imageW * 1.54;
 
 export default function LoginScreen({ navigation }) {
   const [newsData, setNewsData] = useState([]);
+  const [dailyItems, setdailyItems] = useState([]);
+  const [items, setItems] = useState([]);
+  const [itemsImg, setitemsImg] = useState([]);
 
-  useEffect(async () => {
+  useEffect(() => {
+    getNewsData();
+  }, []);
+
+  useEffect(() => {
+    let itemArr = [];
+    let imgs = [];
+    for (let i = 0; i < dailyItems.length; i++) {
+      itemArr.push(dailyItems[i].items);
+    }
+    setItems(itemArr);
+  }, [dailyItems]);
+
+  useEffect(() => {
+    let data = [];
+    const obj = {};
+    for (let i = 0; i < items.length; i++) {
+      let name = items[i][0].name;
+      let description = items[i][0].description;
+      let images = items[i][0].images.icon;
+      obj[i] = {
+        name: name,
+        des: description,
+        img: images,
+      };
+      data.push(obj[i]);
+    }
+    console.log(data);
+    setitemsImg(data);
+  }, [items]);
+
+  const getNewsData = async () => {
     try {
       let response = await fetch("https://fortnite-api.com/v2/news/br", {
         method: "GET",
@@ -33,7 +67,25 @@ export default function LoginScreen({ navigation }) {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  };
+
+  const getStore = async () => {
+    try {
+      let response = await fetch(
+        "https://fortnite-api.com/v2/shop/br/combined",
+        {
+          method: "GET",
+          headers: {
+            Authorization: "c7ed655d-7550-4737-9791-2a0b3ab588cd",
+          },
+        }
+      );
+      let results = await response.json();
+      setdailyItems(results.data.daily.entries);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -42,6 +94,25 @@ export default function LoginScreen({ navigation }) {
         style={styles.background}
         source={require("../../assets/statsbgrnd.jpg")}
       >
+        <View
+          style={{
+            height: "10%",
+            width: "100%",
+            position: "absolute",
+            top: 45,
+          }}
+        >
+          <Text
+            style={{
+              color: "yellow",
+              fontSize: 40,
+              textAlign: "center",
+            }}
+          >
+            {" "}
+            News{" "}
+          </Text>
+        </View>
         {newsData ? (
           <SafeAreaView style={styles.cardContainer}>
             <FlatList
@@ -54,9 +125,10 @@ export default function LoginScreen({ navigation }) {
                   <View
                     style={{
                       width: width,
+                      height: "90%",
+                      marginTop: 0,
                       justifyContent: "center",
                       alignItems: "center",
-                      border: "2px solid yellow",
                     }}
                   >
                     <Text
@@ -72,8 +144,8 @@ export default function LoginScreen({ navigation }) {
                       source={{ uri: item.image }}
                       style={{
                         width: imageW,
-                        height: imageH,
-                        resizeMode: "cover",
+                        height: 150,
+                        resizeMode: "contain",
                         borderWidth: "2",
                         borderColor: "white",
                         borderRadius: 15,
@@ -87,11 +159,66 @@ export default function LoginScreen({ navigation }) {
         ) : null}
         <View
           style={{
-            position: "absolute",
-            border: "2px solid orange",
-            bottom: "15%",
+            borderWidth: 1,
+            borderColor: "orange",
+            height: "45%",
+            marginBottom: 90,
+            width: "100%",
           }}
-        ></View>
+        >
+          {items ? (
+            <FlatList
+              data={itemsImg}
+              horizontal
+              pagingEnabled
+              renderItem={({ item }) => {
+                return (
+                  <View
+                    style={{
+                      width: width,
+                      height: "90%",
+                      marginTop: 0,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: "white",
+                        fontSize: 40,
+                        textAlign: "center",
+                      }}
+                    >
+                      {item.name}
+                    </Text>
+
+                    <Text
+                      style={{
+                        color: "white",
+                        fontSize: 20,
+                        textAlign: "center",
+                      }}
+                    >
+                      {item.des}
+                    </Text>
+                    <Image
+                      source={{ uri: item.img }}
+                      style={{
+                        width: imageW,
+                        height: 150,
+                        resizeMode: "contain",
+                        borderWidth: "2",
+                        borderColor: "white",
+                        borderRadius: 15,
+                      }}
+                    />
+                  </View>
+                );
+              }}
+            />
+          ) : null}
+          <Button onPress={getStore} title="press" />
+        </View>
       </ImageBackground>
     </View>
   );
@@ -112,10 +239,10 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   cardContainer: {
-    border: "2px solid red",
     width: "100%",
     position: "relative",
-    height: "80%",
+    height: "70%",
+    top: -50,
     position: "absolute",
   },
 });
