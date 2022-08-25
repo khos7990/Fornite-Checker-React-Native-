@@ -176,7 +176,7 @@ export default function LoginScreen({ navigation }) {
           <View
             style={{
               border: "2px solid green",
-              height: 250,
+              height: 375,
               flexDirection: "row",
               flexWrap: "wrap",
             }}
@@ -204,6 +204,34 @@ export default function LoginScreen({ navigation }) {
                 />
               </View>
             ))}
+            <View
+              style={{
+                border: "2px solid orange",
+                flexDirection: "row",
+                width: 350,
+                height: 100,
+                borderWidth: 1,
+                borderColor: "orange",
+              }}
+            >
+              {ItemsMoreThanOne.map((i) => (
+                <>
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      color: "white",
+                      textAlign: "center",
+                    }}
+                  >
+                    {i.name}
+                  </Text>
+                  <Image
+                    source={{ uri: i.images.smallIcon }}
+                    style={{ width: 100, height: 80, resizeMode: "center" }}
+                  />
+                </>
+              ))}
+            </View>
           </View>
         </View>
       </ImageBackground>
