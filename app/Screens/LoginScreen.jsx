@@ -22,6 +22,7 @@ export default function LoginScreen({ navigation }) {
   const [dailyItems, setdailyItems] = useState([]);
   const [singleItems, setsingleItems] = useState([]);
   const [ItemsMoreThanOne, setItemsMoreThanOne] = useState([]);
+  const [itemSets, setitemSets] = useState([]);
 
   useEffect(() => {
     getNewsData();
@@ -32,6 +33,17 @@ export default function LoginScreen({ navigation }) {
     items();
   }, [dailyItems]);
 
+  //better way of doing this and check if it works with more than 2 items
+
+  useEffect(() => {
+    for (let i = 0; i < ItemsMoreThanOne.length; i++) {
+      let array = [];
+      if (ItemsMoreThanOne[i].set.value === ItemsMoreThanOne[i++].set.value)
+        array.push(ItemsMoreThanOne[i], ItemsMoreThanOne[i - 1]);
+      itemSets.push(array);
+    }
+    console.log(itemSets);
+  }, [ItemsMoreThanOne]);
   const getNewsData = async () => {
     try {
       let response = await fetch("https://fortnite-api.com/v2/news/br", {
@@ -58,6 +70,7 @@ export default function LoginScreen({ navigation }) {
           },
         }
       );
+
       let results = await response.json();
       let arrOfItems = [];
       results.data.daily.entries.map((item) => {
@@ -208,15 +221,57 @@ export default function LoginScreen({ navigation }) {
               style={{
                 border: "2px solid orange",
                 flexDirection: "row",
-                width: 350,
+                justifyContent: "center",
+                alignItems: "center",
+                width: 375,
                 height: 100,
-                borderWidth: 1,
+                borderWidth: 2,
                 borderColor: "orange",
               }}
             >
-              {ItemsMoreThanOne.map((i) => (
-                <>
-                  <Text
+              <>
+                {/* {itemSets.map((set) => (
+                  <> */}
+                <FlatList
+                  data={}
+                  keyExtractor={(item) => item.name}
+                  horizontal
+                  pagingEnabled
+                  renderItem={({ item }) => {
+                    return (
+                      <View
+                        style={{
+                          width: 150,
+                          bottom: 0,
+                          alignItems: "center",
+                          border: "2px solid blue",
+                        }}
+                      >
+                        <Text
+                          style={{
+                            color: "white",
+                            fontSize: 10,
+                            textAlign: "center",
+                          }}
+                        >
+                          {item.name}
+                        </Text>
+                        <Image
+                          source={{ uri: item.images.smallIcon }}
+                          style={{
+                            width: 100,
+                            height: 80,
+                            resizeMode: "contain",
+                            borderWidth: "2",
+                            borderColor: "white",
+                            borderRadius: 15,
+                          }}
+                        />
+                      </View>
+                    );
+                  }}
+                />
+                {/* <Text
                     style={{
                       fontSize: 15,
                       color: "white",
@@ -228,9 +283,11 @@ export default function LoginScreen({ navigation }) {
                   <Image
                     source={{ uri: i.images.smallIcon }}
                     style={{ width: 100, height: 80, resizeMode: "center" }}
-                  />
-                </>
-              ))}
+                  /> */}
+                {/* </>
+                ))} */}
+              </>
+              {/* ))} */}
             </View>
           </View>
         </View>

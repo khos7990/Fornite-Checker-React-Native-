@@ -20,27 +20,14 @@ export default function Welcome() {
   const [Allstats, setAllStats] = useState();
   const [CardTitleColor, setCardTitleColor] = useState("#20C7DE");
   const [focusColor, setfocusColor] = useState("orange");
-  const [BtnColorSolo, setBtnSoloColor] = useState("orange");
-  const [BtnColorDuo, setBtnDuoColor] = useState("orange");
-  const [BtnColorSquad, setBtnSquadColor] = useState("orange");
-  const [clickedBtn, setclickedBtn] = useState("#852DF5");
 
   useEffect(() => {
     if (GameMode === "solo") {
       setCardTitleColor("#2D7CF5");
-      setBtnSoloColor("#852DF5");
-      setBtnDuoColor("orange");
-      setBtnSquadColor("orange");
     } else if (GameMode === "duo") {
       setCardTitleColor("#FF9E43");
-      setBtnDuoColor("#852DF5");
-      setBtnSoloColor("orange");
-      setBtnSquadColor("orange");
     } else {
       setCardTitleColor("#852DF5");
-      setBtnSquadColor("#852DF5");
-      setBtnSoloColor("orange");
-      setBtnDuoColor("orange");
     }
   }, [GameMode]);
 
@@ -104,7 +91,7 @@ export default function Welcome() {
           <Appbar.Header style={styles.header}>
             <Button
               labelStyle={{ fontSize: "20%" }}
-              buttonColor={BtnColorSolo}
+              buttonColor={GameMode === "solo" ? "#852DF5" : "orange"}
               textColor="black"
               style={styles.NavBtn}
               onPress={(e) => getGameMode(e, "solo")}
@@ -114,7 +101,7 @@ export default function Welcome() {
             </Button>
             <Button
               labelStyle={{ fontSize: "20%" }}
-              buttonColor={BtnColorDuo}
+              buttonColor={GameMode === "duo" ? "#852DF5" : "orange"}
               style={styles.NavBtn}
               onPress={(e) => getGameMode(e, "duo")}
               mode="contained"
@@ -123,7 +110,7 @@ export default function Welcome() {
             </Button>
             <Button
               labelStyle={{ fontSize: "20%" }}
-              buttonColor={BtnColorSquad}
+              buttonColor={GameMode === "squad" ? "#852DF5" : "orange"}
               style={styles.NavBtn}
               onPress={(e) => getGameMode(e, "squad")}
               mode="contained"

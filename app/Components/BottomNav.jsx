@@ -16,12 +16,10 @@ export default function BottomNav() {
         tabBarShowLabel: false,
         tabBarStyle: {
           position: "absolute",
-          bottom: 10,
+          bottom: 5,
           borderRadius: 5,
           backgroundColor: "#6C27F8",
           height: 80,
-          right: 5,
-          left: 5,
         },
       }}
     >
