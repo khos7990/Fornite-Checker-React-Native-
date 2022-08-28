@@ -9,9 +9,11 @@ import {
   FlatList,
   Image,
 } from "react-native";
-import { Card } from "react-native-paper";
+import { Card, Modal } from "react-native-paper";
 import { SafeAreaView } from "react-native";
 import { Dimensions } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import ModalComponent from "../Components/Modal";
 
 const { width, height } = Dimensions.get("screen");
 const imageW = width * 0.7;
@@ -23,6 +25,7 @@ export default function LoginScreen({ navigation }) {
   const [singleItems, setsingleItems] = useState([]);
   const [ItemsMoreThanOne, setItemsMoreThanOne] = useState([]);
   const [itemSets, setitemSets] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     getNewsData();
@@ -103,6 +106,11 @@ export default function LoginScreen({ navigation }) {
     });
   };
 
+  const getDailyEvent = (e, name) => {
+    console.log(name);
+    setOpenModal(!openModal);
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -136,6 +144,7 @@ export default function LoginScreen({ navigation }) {
                     >
                       {item.title}
                     </Text>
+
                     <Image
                       source={{ uri: item.image }}
                       style={{
@@ -209,14 +218,17 @@ export default function LoginScreen({ navigation }) {
                 >
                   {item.name}
                 </Text>
-                <Image
-                  source={{ uri: item.images.smallIcon }}
-                  style={{
-                    width: 100,
-                    height: 100,
-                    resizeMode: "center",
-                  }}
-                />
+                <TouchableOpacity onPress={(e) => getDailyEvent(e, item.name)}>
+                  <Image
+                    source={{ uri: item.images.smallIcon }}
+                    style={{
+                      width: 100,
+                      height: 100,
+                      resizeMode: "center",
+                    }}
+                  />
+                </TouchableOpacity>
+                <ModalComponent open={openModal} />
               </View>
             ))}
             <View
