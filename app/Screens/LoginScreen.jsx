@@ -9,7 +9,7 @@ import {
   FlatList,
   Image,
 } from "react-native";
-import { Card, Modal } from "react-native-paper";
+import { Card } from "react-native-paper";
 import { SafeAreaView } from "react-native";
 import { Dimensions } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -26,6 +26,7 @@ export default function LoginScreen({ navigation }) {
   const [ItemsMoreThanOne, setItemsMoreThanOne] = useState([]);
   const [itemSets, setitemSets] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const [itemSelected, setitemSelected] = useState();
 
   useEffect(() => {
     getNewsData();
@@ -107,9 +108,12 @@ export default function LoginScreen({ navigation }) {
   };
 
   const getDailyEvent = (e, name) => {
-    console.log(name);
     setOpenModal(!openModal);
+    const itemClicked = singleItems.filter((item) => item.name === name);
+    setitemSelected(itemClicked);
   };
+
+  const hideModal = () => setOpenModal(false);
 
   return (
     <View style={styles.container}>
@@ -228,7 +232,12 @@ export default function LoginScreen({ navigation }) {
                     }}
                   />
                 </TouchableOpacity>
-                <ModalComponent open={openModal} />
+
+                <ModalComponent
+                  open={openModal}
+                  close={hideModal}
+                  itemSelected={itemSelected}
+                />
               </View>
             ))}
             <View
