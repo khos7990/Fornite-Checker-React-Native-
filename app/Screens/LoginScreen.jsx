@@ -36,13 +36,15 @@ export default function LoginScreen({ navigation }) {
   //better way of doing this and check if it works with more than 2 items
 
   useEffect(() => {
+    let array = [];
     for (let i = 0; i < ItemsMoreThanOne.length; i++) {
-      let array = [];
-      if (ItemsMoreThanOne[i].set.value === ItemsMoreThanOne[i++].set.value)
-        array.push(ItemsMoreThanOne[i], ItemsMoreThanOne[i - 1]);
-      itemSets.push(array);
+      if (ItemsMoreThanOne[i].set.value === ItemsMoreThanOne[i++].set.value) {
+        let arr = [];
+        arr.push(ItemsMoreThanOne[i], ItemsMoreThanOne[i - 1]);
+        array.push(arr);
+      }
     }
-    console.log(itemSets);
+    setitemSets(array);
   }, [ItemsMoreThanOne]);
   const getNewsData = async () => {
     try {
@@ -229,65 +231,31 @@ export default function LoginScreen({ navigation }) {
                 borderColor: "orange",
               }}
             >
-              <>
-                {/* {itemSets.map((set) => (
-                  <> */}
-                <FlatList
-                  data={}
-                  keyExtractor={(item) => item.name}
-                  horizontal
-                  pagingEnabled
-                  renderItem={({ item }) => {
-                    return (
-                      <View
+              {itemSets.map((item) => {
+                return item.map((set) => {
+                  return (
+                    <View>
+                      <Text
                         style={{
-                          width: 150,
-                          bottom: 0,
-                          alignItems: "center",
-                          border: "2px solid blue",
+                          fontSize: 15,
+                          color: "white",
+                          textAlign: "center",
                         }}
                       >
-                        <Text
-                          style={{
-                            color: "white",
-                            fontSize: 10,
-                            textAlign: "center",
-                          }}
-                        >
-                          {item.name}
-                        </Text>
-                        <Image
-                          source={{ uri: item.images.smallIcon }}
-                          style={{
-                            width: 100,
-                            height: 80,
-                            resizeMode: "contain",
-                            borderWidth: "2",
-                            borderColor: "white",
-                            borderRadius: 15,
-                          }}
-                        />
-                      </View>
-                    );
-                  }}
-                />
-                {/* <Text
-                    style={{
-                      fontSize: 15,
-                      color: "white",
-                      textAlign: "center",
-                    }}
-                  >
-                    {i.name}
-                  </Text>
-                  <Image
-                    source={{ uri: i.images.smallIcon }}
-                    style={{ width: 100, height: 80, resizeMode: "center" }}
-                  /> */}
-                {/* </>
-                ))} */}
-              </>
-              {/* ))} */}
+                        {set.name}
+                      </Text>
+                      <Image
+                        source={{ uri: set.images.smallIcon }}
+                        style={{
+                          height: 80,
+                          width: 90,
+                          resizeMode: "center",
+                        }}
+                      />
+                    </View>
+                  );
+                });
+              })}
             </View>
           </View>
         </View>
