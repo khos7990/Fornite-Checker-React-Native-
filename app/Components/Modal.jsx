@@ -17,15 +17,18 @@ export default function ModalComponent({ open, close, itemSelected }) {
         visible={open}
         onDismiss={close}
         contentContainerStyle={containerStyle}
-        style={{ justifyContent: "center", alignItems: "center" }}
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          opacity: 0.5,
+          shadowOpacity: 1,
+        }}
       >
         {itemSelected ? (
           <View
             style={{
               height: modalH,
-              borderWidth: 2,
-              borderColor: "orange",
-              border: "2px solid orange",
+
               alignItems: "center",
             }}
           >
@@ -38,6 +41,11 @@ export default function ModalComponent({ open, close, itemSelected }) {
               style={{ textAlign: "center", fontSize: 20, color: "orange" }}
             >
               {itemSelected[0].description}{" "}
+            </Text>
+            <Text
+              style={{ textAlign: "center", fontSize: 15, color: "orange" }}
+            >
+              Type: {itemSelected[0].type.displayValue}{" "}
             </Text>
             <Image
               source={{ uri: itemSelected[0].images.smallIcon }}
