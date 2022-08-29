@@ -126,6 +126,22 @@ export default function LoginScreen({ navigation }) {
     }
   };
 
+  const getItemSetClicked = (e, name) => {
+    setOpenModal(!openModal);
+    const itemClicked = ItemsMoreThanOne.filter((item) => item.name === name);
+    setitemSelected(itemClicked);
+    if (itemClicked[0].rarity.displayValue === "Uncommon") {
+      setitemRarity("#016604");
+    } else if (itemClicked[0].rarity.displayValue === "Rare") {
+      setitemRarity("#008dd4");
+    } else if (itemClicked[0].rarity.displayValue === "Epic") {
+      setitemRarity("#8a2be2");
+    } else if (itemClicked[0].rarity.displayValue === "Legendary") {
+      setitemRarity("#de6e0e");
+    } else {
+      setitemRarity("#40464d");
+    }
+  };
   const hideModal = () => setOpenModal(false);
 
   return (
@@ -202,8 +218,6 @@ export default function LoginScreen({ navigation }) {
         ) : null}
         <View
           style={{
-            borderWidth: 1,
-            borderColor: "orange",
             height: "45%",
             marginBottom: 90,
             width: "100%",
@@ -279,14 +293,18 @@ export default function LoginScreen({ navigation }) {
                       >
                         {set.name}
                       </Text>
-                      <Image
-                        source={{ uri: set.images.smallIcon }}
-                        style={{
-                          height: 80,
-                          width: 90,
-                          resizeMode: "center",
-                        }}
-                      />
+                      <TouchableOpacity
+                        onPress={(e) => getItemSetClicked(e, set.name)}
+                      >
+                        <Image
+                          source={{ uri: set.images.smallIcon }}
+                          style={{
+                            height: 80,
+                            width: 90,
+                            resizeMode: "center",
+                          }}
+                        />
+                      </TouchableOpacity>
                     </View>
                   );
                 });

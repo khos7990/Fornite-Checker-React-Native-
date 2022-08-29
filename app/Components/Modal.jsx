@@ -46,6 +46,9 @@ export default function ModalComponent({
                 style={{
                   width: modalW,
                   backgroundColor: itemRarity,
+                  borderWidth: 1,
+                  borderColor: "white",
+                  marginBottom: 15,
                 }}
               >
                 <Text
