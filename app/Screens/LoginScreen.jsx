@@ -26,7 +26,8 @@ export default function LoginScreen({ navigation }) {
   const [ItemsMoreThanOne, setItemsMoreThanOne] = useState([]);
   const [itemSets, setitemSets] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const [itemSelected, setitemSelected] = useState();
+  const [itemSelected, setitemSelected] = useState([]);
+  const [itemRarity, setitemRarity] = useState();
 
   useEffect(() => {
     getNewsData();
@@ -107,10 +108,22 @@ export default function LoginScreen({ navigation }) {
     });
   };
 
+  //setting modal and rarity color
   const getDailyEvent = (e, name) => {
     setOpenModal(!openModal);
     const itemClicked = singleItems.filter((item) => item.name === name);
     setitemSelected(itemClicked);
+    if (itemClicked[0].rarity.displayValue === "Uncommon") {
+      setitemRarity("#016604");
+    } else if (itemClicked[0].rarity.displayValue === "Rare") {
+      setitemRarity("#008dd4");
+    } else if (itemClicked[0].rarity.displayValue === "Epic") {
+      setitemRarity("#8a2be2");
+    } else if (itemClicked[0].rarity.displayValue === "Legendary") {
+      setitemRarity("#de6e0e");
+    } else {
+      setitemRarity("#40464d");
+    }
   };
 
   const hideModal = () => setOpenModal(false);
@@ -237,6 +250,7 @@ export default function LoginScreen({ navigation }) {
                   open={openModal}
                   close={hideModal}
                   itemSelected={itemSelected}
+                  itemRarity={itemRarity}
                 />
               </View>
             ))}
