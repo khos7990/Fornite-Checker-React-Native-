@@ -224,7 +224,14 @@ export default function LoginScreen({ navigation }) {
           }}
         >
           <View style={{ border: "2px solid yellow" }}>
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
+            <Text
+              style={{
+                fontSize: 20,
+                color: "white",
+                textAlign: "center",
+                marginBottom: 5,
+              }}
+            >
               Dailys
             </Text>
           </View>
@@ -245,7 +252,7 @@ export default function LoginScreen({ navigation }) {
                 }}
               >
                 <Text
-                  style={{ fontSize: 15, color: "white", textAlign: "center" }}
+                  style={{ fontSize: 13, color: "white", textAlign: "center" }}
                 >
                   {item.name}
                 </Text>
@@ -272,11 +279,14 @@ export default function LoginScreen({ navigation }) {
               style={{
                 border: "2px solid orange",
                 flexDirection: "row",
-                justifyContent: "center",
+                justifyContent: "space-evenly",
                 alignItems: "center",
                 width: 375,
                 height: 100,
                 borderWidth: 2,
+                borderBottomWidth: 0,
+                shadowColor: "orange",
+                shadowOpacity: 5,
                 borderColor: "orange",
               }}
             >

@@ -10,6 +10,7 @@ import {
   Image,
 } from "react-native";
 import { Card, Appbar, Button, Title, Text } from "react-native-paper";
+import AppbarComponent from "../Components/Appbar";
 import BottomNav from "../Components/BottomNav";
 
 export default function Welcome() {
@@ -62,8 +63,7 @@ export default function Welcome() {
       source={require("../../assets/statsbgrnd.jpg")}
     >
       <View style={styles.search}>
-        <Text style={styles.searchText}>Search a player</Text>
-
+        <AppbarComponent />
         <TextInput
           onChangeText={onChangeText}
           placeholder="Account name"
@@ -79,6 +79,7 @@ export default function Welcome() {
             textAlign: "center",
             borderColor: focusColor,
             fontSize: "30%",
+            marginBottom: 30,
           }}
         />
         <Button style={styles.submitBtn} onPress={getPlayer} mode="outlined">
@@ -297,14 +298,14 @@ const styles = StyleSheet.create({
 
   search: {
     width: "100%",
-    height: "25%",
+    height: "30%",
     alignItems: "center",
     justifyContent: "space-evenly",
   },
 
   StatsContainer: {
     top: "0%",
-    height: "70%",
+    height: "65%",
     width: "100%",
     alignItems: "center",
   },
@@ -346,13 +347,7 @@ const styles = StyleSheet.create({
   submitBtn: {
     borderWidth: 2,
     borderColor: "orange",
-  },
-
-  card: {
-    // backgroundColor: "transparent",
-    // height: "100%",
-    // borderWidth: 5,
-    // borderBottomWidth: 0,
+    marginBottom: 30,
   },
 
   cardText: {

@@ -57,7 +57,7 @@ export default function ModalComponent({
                   {item.name}
                 </Text>
                 <Text
-                  style={{ textAlign: "center", fontSize: 20, color: "white" }}
+                  style={{ textAlign: "center", fontSize: 15, color: "white" }}
                 >
                   {item.description}{" "}
                 </Text>
@@ -73,7 +73,8 @@ export default function ModalComponent({
                   width: 80,
                   height: 80,
                   borderWidth: 0.5,
-                  borderColor: "black",
+                  borderColor: "white",
+                  marginBottom: 8,
                 }}
               />
               <Text
@@ -89,12 +90,26 @@ export default function ModalComponent({
                 style={{ textAlign: "center", fontSize: 15, color: "white" }}
               >
                 Chapter: {item.introduction.chapter}{" "}
+                <Text
+                  style={{ textAlign: "center", fontSize: 15, color: "white" }}
+                >
+                  Season: {item.introduction.season}{" "}
+                </Text>
               </Text>
-              <Text
-                style={{ textAlign: "center", fontSize: 15, color: "white" }}
-              >
-                Season: {item.introduction.season}{" "}
-              </Text>
+              {item.set ? (
+                <Text
+                  style={{
+                    position: "absolute",
+                    bottom: 20,
+                    textAlign: "center",
+                    fontSize: 15,
+                    color: "white",
+                  }}
+                >
+                  {" "}
+                  {item.set.text}{" "}
+                </Text>
+              ) : null}
             </View>
           </ImageBackground>
         ))}
