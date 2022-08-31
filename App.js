@@ -3,6 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider as PaperProvider, useTheme } from "react-native-paper";
 import BottomNav from "./app/Components/BottomNav";
+import SearchScreen from "./app/Screens/SearchScreen";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,10 +17,12 @@ const theme = {
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <BottomNav />
-      </NavigationContainer>
-    </PaperProvider>
+    <SafeAreaProvider>
+      <PaperProvider theme={theme}>
+        {/* <NavigationContainer> */}
+        <SearchScreen />
+        {/* </NavigationContainer> */}
+      </PaperProvider>
+    </SafeAreaProvider>
   );
 }

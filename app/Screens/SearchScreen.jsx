@@ -57,6 +57,12 @@ export default function Welcome() {
     }
   };
 
+  const killIcon = require("../../assets/icons/gun.png");
+  const deathIcon = require("../../assets/icons/skull.png");
+  const rateIcon = require("../../assets/icons/rate.png");
+  const winIcon = require("../../assets/icons/wins.png");
+  const loseIcon = require("../../assets/icons/lose.png");
+
   return (
     <ImageBackground
       style={styles.imagecontainer}
@@ -171,12 +177,40 @@ export default function Welcome() {
               >
                 <View style={styles.chartData}>
                   <View style={styles.winsndlosses}>
-                    <Text variant="headlineSmall" style={styles.text}>
-                      Wins: {Allstats[GameMode].wins}
+                    <Text
+                      variant="headlineSmall"
+                      style={{
+                        color: "orange",
+
+                        fontSize: 25,
+                      }}
+                    >
+                      Wins: {Allstats[GameMode].wins}{" "}
+                      <Image
+                        source={winIcon}
+                        style={{
+                          width: 20,
+                          height: 20,
+                        }}
+                      />
                     </Text>
-                    <Text variant="headlineSmall" style={styles.text}>
+                    <Text
+                      variant="headlineSmall"
+                      style={{
+                        color: "orange",
+
+                        fontSize: 25,
+                      }}
+                    >
                       Losses:{" "}
-                      {Allstats[GameMode].matches - Allstats[GameMode].wins}
+                      {Allstats[GameMode].matches - Allstats[GameMode].wins}{" "}
+                      <Image
+                        source={loseIcon}
+                        style={{
+                          width: 20,
+                          height: 20,
+                        }}
+                      />
                     </Text>
                   </View>
                   <View style={styles.chartContainer}>
@@ -210,32 +244,49 @@ export default function Welcome() {
                       }}
                       variant="headlineSmall"
                     >
-                      {" "}
                       Kills{" "}
+                      <Image
+                        source={killIcon}
+                        style={{
+                          width: 20,
+                          height: 25,
+                          tintColor: "red",
+                        }}
+                      />
                     </Text>
                     <Text style={styles.text} variant="headlineSmall">
-                      {" "}
-                      {Allstats[GameMode].kills}{" "}
+                      {Allstats[GameMode].kills}
                     </Text>
                   </View>
                   <View style={styles.deaths}>
                     <Text style={styles.text} variant="headlineSmall">
-                      {" "}
                       Deaths{" "}
+                      <Image
+                        source={deathIcon}
+                        style={{
+                          width: 20,
+                          height: 25,
+                        }}
+                      />
                     </Text>
 
                     <Text style={styles.text} variant="headlineSmall">
-                      {" "}
                       {Allstats[GameMode].deaths}
                     </Text>
                   </View>
                   <View style={styles.kd}>
                     <Text style={styles.text} variant="headlineSmall">
-                      {" "}
                       KD{" "}
+                      <Image
+                        source={rateIcon}
+                        style={{
+                          width: 20,
+                          height: 25,
+                          tintColor: "white",
+                        }}
+                      />
                     </Text>
                     <Text style={styles.text} variant="headlineSmall">
-                      {" "}
                       {Allstats[GameMode].kd}
                     </Text>
                   </View>
@@ -253,12 +304,15 @@ const styles = StyleSheet.create({
   kills: {
     border: "2px solid blue",
   },
+
   chartContainer: {
     marginLeft: "20%",
+    alignItems: "center",
   },
   winsndlosses: {
     height: "60%",
     justifyContent: "center",
+    alignItems: "center",
   },
   matchData: {
     border: "2px solid pink",
