@@ -171,15 +171,11 @@ export default function Welcome() {
               >
                 <View style={styles.chartData}>
                   <View style={styles.winsndlosses}>
-                    <Text
-                      variant="headlineSmall"
-                      style={{ color: "orange", marginBottom: "5%" }}
-                    >
-                      {" "}
-                      Wins {Allstats[GameMode].wins}
+                    <Text variant="headlineSmall" style={styles.text}>
+                      Wins: {Allstats[GameMode].wins}
                     </Text>
                     <Text variant="headlineSmall" style={styles.text}>
-                      Losses{" "}
+                      Losses:{" "}
                       {Allstats[GameMode].matches - Allstats[GameMode].wins}
                     </Text>
                   </View>
@@ -261,8 +257,8 @@ const styles = StyleSheet.create({
     marginLeft: "20%",
   },
   winsndlosses: {
-    marginTop: "6%",
     height: "60%",
+    justifyContent: "center",
   },
   matchData: {
     border: "2px solid pink",
@@ -273,13 +269,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     bottom: 0,
     flexDirection: "row",
+    borderColor: "red",
+    borderWidth: 1,
   },
   chartData: {
     width: "100%",
     height: "50%",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
-    position: "absolute",
     flexDirection: "row",
     border: "2px solid red",
   },
