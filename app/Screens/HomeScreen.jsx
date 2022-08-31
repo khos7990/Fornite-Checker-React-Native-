@@ -172,6 +172,7 @@ export default function LoginScreen({ navigation }) {
                       style={{
                         color: "white",
                         fontSize: 40,
+                        fontFamily: "Inconsolata_700Bold",
                         textAlign: "center",
                       }}
                     >
@@ -205,6 +206,7 @@ export default function LoginScreen({ navigation }) {
                   flex: 1,
                   textAlign: "center",
                   marginLeft: 25,
+                  fontFamily: "Inconsolata_500Medium",
                 }}
               >
                 Swipe to see whats new{" "}
@@ -230,6 +232,7 @@ export default function LoginScreen({ navigation }) {
                 color: "white",
                 textAlign: "center",
                 marginBottom: 5,
+                fontFamily: "Inconsolata_700Bold",
               }}
             >
               Dailys
@@ -253,7 +256,12 @@ export default function LoginScreen({ navigation }) {
                 }}
               >
                 <Text
-                  style={{ fontSize: 13, color: "white", textAlign: "center" }}
+                  style={{
+                    fontSize: 16,
+                    color: "white",
+                    textAlign: "center",
+                    fontFamily: "Inconsolata_300Light",
+                  }}
                 >
                   {item.name}
                 </Text>
@@ -297,9 +305,10 @@ export default function LoginScreen({ navigation }) {
                     <View>
                       <Text
                         style={{
-                          fontSize: 15,
+                          fontSize: 18,
                           color: "white",
                           textAlign: "center",
+                          fontFamily: "Inconsolata_300Light",
                         }}
                       >
                         {set.name}

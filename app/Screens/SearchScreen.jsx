@@ -86,9 +86,15 @@ export default function Welcome() {
             borderColor: focusColor,
             fontSize: "30%",
             marginBottom: 30,
+            fontFamily: "Inconsolata_400Regular",
           }}
         />
-        <Button style={styles.submitBtn} onPress={getPlayer} mode="outlined">
+        <Button
+          labelStyle={{ fontSize: 25, fontFamily: "Inconsolata_500Medium" }}
+          style={styles.submitBtn}
+          onPress={getPlayer}
+          mode="outlined"
+        >
           Submit
         </Button>
       </View>
@@ -97,7 +103,10 @@ export default function Welcome() {
         <View style={styles.NavContainer}>
           <Appbar.Header style={styles.header}>
             <Button
-              labelStyle={{ fontSize: "20%" }}
+              labelStyle={{
+                fontSize: "20%",
+                fontFamily: "Inconsolata_500Medium",
+              }}
               buttonColor={GameMode === "solo" ? "#852DF5" : "orange"}
               textColor={GameMode === "solo" ? "orange" : "#852DF5"}
               style={styles.NavBtn}
@@ -107,7 +116,10 @@ export default function Welcome() {
               Solo
             </Button>
             <Button
-              labelStyle={{ fontSize: "20%" }}
+              labelStyle={{
+                fontSize: "20%",
+                fontFamily: "Inconsolata_500Medium",
+              }}
               buttonColor={GameMode === "duo" ? "#852DF5" : "orange"}
               textColor={GameMode === "duo" ? "orange" : "#852DF5"}
               style={styles.NavBtn}
@@ -117,7 +129,10 @@ export default function Welcome() {
               Duo
             </Button>
             <Button
-              labelStyle={{ fontSize: "20%" }}
+              labelStyle={{
+                fontSize: "20%",
+                fontFamily: "Inconsolata_500Medium",
+              }}
               buttonColor={GameMode === "squad" ? "#852DF5" : "orange"}
               textColor={GameMode === "squad" ? "orange" : "#852DF5"}
               style={styles.NavBtn}
@@ -158,10 +173,17 @@ export default function Welcome() {
                 }}
               >
                 <Card.Title
+                  titleStyle={{ fontFamily: "Inconsolata_700Bold" }}
                   titleVariant="displaySmall"
                   title={GameMode}
                   right={(text) => (
-                    <Text style={{ marginRight: "5%" }} variant="headlineSmall">
+                    <Text
+                      style={{
+                        marginRight: "5%",
+                        fontFamily: "Inconsolata_700Bold",
+                      }}
+                      variant="headlineSmall"
+                    >
                       {Allstats[GameMode].matches} Matches
                     </Text>
                   )}
@@ -181,7 +203,7 @@ export default function Welcome() {
                       variant="headlineSmall"
                       style={{
                         color: "orange",
-
+                        fontFamily: "Inconsolata_500Medium",
                         fontSize: 25,
                       }}
                     >
@@ -198,7 +220,7 @@ export default function Welcome() {
                       variant="headlineSmall"
                       style={{
                         color: "orange",
-
+                        fontFamily: "Inconsolata_500Medium",
                         fontSize: 25,
                       }}
                     >
@@ -216,7 +238,11 @@ export default function Welcome() {
                   <View style={styles.chartContainer}>
                     <Text
                       variant="headlineSmall"
-                      style={{ color: "orange", marginBottom: "5%" }}
+                      style={{
+                        color: "orange",
+                        marginBottom: "5%",
+                        fontFamily: "Inconsolata_500Medium",
+                      }}
                     >
                       {" "}
                       Win Rate
@@ -241,6 +267,7 @@ export default function Welcome() {
                       style={{
                         color: "orange",
                         border: "2px solid yellow",
+                        fontFamily: "Inconsolata_500Medium",
                       }}
                       variant="headlineSmall"
                     >
@@ -308,6 +335,8 @@ const styles = StyleSheet.create({
   chartContainer: {
     marginLeft: "20%",
     alignItems: "center",
+
+    width: 120,
   },
   winsndlosses: {
     height: "60%",
@@ -365,6 +394,7 @@ const styles = StyleSheet.create({
   searchText: {
     fontSize: "30px",
     color: "yellow",
+    fontFamily: "Inconsolata_300Light",
   },
   input: {
     width: "75%",
@@ -372,9 +402,11 @@ const styles = StyleSheet.create({
     height: "25%",
     color: "yellow",
     fontSize: 25,
+    fontFamily: "Inconsolata_300Light",
   },
   searchInput: {
     color: "white",
+    fontFamily: "Inconsolata_300Light",
   },
 
   NavContainer: {
@@ -422,6 +454,7 @@ const styles = StyleSheet.create({
     left: 0,
     fontSize: "26px",
     color: "orange",
+    fontFamily: "Inconsolata_300Light",
   },
 
   PlayerText: {
@@ -429,8 +462,10 @@ const styles = StyleSheet.create({
     right: 0,
     fontSize: "26px",
     color: "orange",
+    fontFamily: "Inconsolata_300Light",
   },
   text: {
     color: "orange",
+    fontFamily: "Inconsolata_500Medium",
   },
 });

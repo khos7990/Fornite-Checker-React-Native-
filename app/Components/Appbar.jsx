@@ -37,5 +37,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 30,
     height: 40,
+    fontFamily: "Inconsolata_700Bold",
   },
 });

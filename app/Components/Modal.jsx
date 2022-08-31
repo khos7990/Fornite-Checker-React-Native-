@@ -52,17 +52,32 @@ export default function ModalComponent({
                 }}
               >
                 <Text
-                  style={{ textAlign: "center", fontSize: 25, color: "white" }}
+                  style={{
+                    textAlign: "center",
+                    fontSize: 25,
+                    color: "white",
+                    fontFamily: "Inconsolata_500Medium",
+                  }}
                 >
                   {item.name}
                 </Text>
                 <Text
-                  style={{ textAlign: "center", fontSize: 15, color: "white" }}
+                  style={{
+                    textAlign: "center",
+                    fontSize: 15,
+                    color: "white",
+                    fontFamily: "Inconsolata_400Regular",
+                  }}
                 >
                   {item.description}{" "}
                 </Text>
                 <Text
-                  style={{ textAlign: "center", fontSize: 15, color: "white" }}
+                  style={{
+                    textAlign: "center",
+                    fontSize: 20,
+                    color: "white",
+                    fontFamily: "Inconsolata_400Regular",
+                  }}
                 >
                   Type: {item.type.displayValue}{" "}
                 </Text>
@@ -82,16 +97,27 @@ export default function ModalComponent({
                   textAlign: "center",
                   fontSize: 20,
                   color: "white",
+                  fontFamily: "Inconsolata_400Regular",
                 }}
               >
                 Rarity: {item.rarity.displayValue}
               </Text>
               <Text
-                style={{ textAlign: "center", fontSize: 15, color: "white" }}
+                style={{
+                  textAlign: "center",
+                  fontSize: 15,
+                  color: "white",
+                  fontFamily: "Inconsolata_300Light",
+                }}
               >
                 Chapter: {item.introduction.chapter}{" "}
                 <Text
-                  style={{ textAlign: "center", fontSize: 15, color: "white" }}
+                  style={{
+                    textAlign: "center",
+                    fontSize: 15,
+                    color: "white",
+                    fontFamily: "Inconsolata_300Light",
+                  }}
                 >
                   Season: {item.introduction.season}{" "}
                 </Text>
@@ -104,6 +130,7 @@ export default function ModalComponent({
                     textAlign: "center",
                     fontSize: 15,
                     color: "white",
+                    fontFamily: "Inconsolata_300Light",
                   }}
                 >
                   {" "}

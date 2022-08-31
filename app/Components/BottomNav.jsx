@@ -44,7 +44,13 @@ export default function BottomNav() {
                   tintColor: focused ? "#FFFFFF" : "#31BD00",
                 }}
               />
-              <Text style={{ color: focused ? "#FFFFFF" : "#31BD00" }}>
+              <Text
+                style={{
+                  color: focused ? "#FFFFFF" : "#31BD00",
+                  fontFamily: "Inconsolata_400Regular",
+                  fontSize: 20,
+                }}
+              >
                 Home
               </Text>
             </View>
@@ -72,7 +78,13 @@ export default function BottomNav() {
                   tintColor: focused ? "#FFFFFF" : "#31BD00",
                 }}
               />
-              <Text style={{ color: focused ? "#FFFFFF" : "#31BD00" }}>
+              <Text
+                style={{
+                  color: focused ? "#FFFFFF" : "#31BD00",
+                  fontFamily: "Inconsolata_400Regular",
+                  fontSize: 20,
+                }}
+              >
                 {" "}
                 Search{" "}
               </Text>
