@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "fortnite",
-    "slug": "fortnite",
+    "name": "Fornite Tracker",
+    "slug": "Fortnite-Tracker",
+    "description": "This app allows you to track players fortnite scores, as well as get updates on news and daily items!",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

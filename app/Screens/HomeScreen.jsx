@@ -93,7 +93,7 @@ export default function Welcome() {
             <Button
               labelStyle={{ fontSize: "20%" }}
               buttonColor={GameMode === "solo" ? "#852DF5" : "orange"}
-              textColor="black"
+              textColor={GameMode === "solo" ? "orange" : "#852DF5"}
               style={styles.NavBtn}
               onPress={(e) => getGameMode(e, "solo")}
               mode="contained"
@@ -103,6 +103,7 @@ export default function Welcome() {
             <Button
               labelStyle={{ fontSize: "20%" }}
               buttonColor={GameMode === "duo" ? "#852DF5" : "orange"}
+              textColor={GameMode === "duo" ? "orange" : "#852DF5"}
               style={styles.NavBtn}
               onPress={(e) => getGameMode(e, "duo")}
               mode="contained"
@@ -112,6 +113,7 @@ export default function Welcome() {
             <Button
               labelStyle={{ fontSize: "20%" }}
               buttonColor={GameMode === "squad" ? "#852DF5" : "orange"}
+              textColor={GameMode === "squad" ? "orange" : "#852DF5"}
               style={styles.NavBtn}
               onPress={(e) => getGameMode(e, "squad")}
               mode="contained"
