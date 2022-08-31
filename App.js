@@ -2,8 +2,6 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider as PaperProvider, useTheme } from "react-native-paper";
-import LoginScreen from "./app/Screens/LoginScreen";
-import HomeScreen from "./app/Screens/HomeScreen";
 import BottomNav from "./app/Components/BottomNav";
 
 const Stack = createNativeStackNavigator();

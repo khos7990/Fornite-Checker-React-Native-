@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import SearchScreen from "../Screens/SearchScreen";
 import HomeScreen from "../Screens/HomeScreen";
-import LoginScreen from "../Screens/LoginScreen";
 
 //screennames
 
@@ -25,7 +25,7 @@ export default function BottomNav() {
     >
       <Tab.Screen
         name="Login"
-        component={LoginScreen}
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <View
@@ -53,7 +53,7 @@ export default function BottomNav() {
       />
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={SearchScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <View
