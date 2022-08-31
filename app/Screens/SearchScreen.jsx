@@ -262,12 +262,11 @@ const styles = StyleSheet.create({
   },
   matchData: {
     border: "2px solid pink",
-    height: "75%",
+    height: "30%",
     width: "100%",
-    position: "absolute",
+
     justifyContent: "space-around",
     alignItems: "center",
-    bottom: 0,
     flexDirection: "row",
     borderColor: "red",
     borderWidth: 1,
