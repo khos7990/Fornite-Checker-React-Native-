@@ -9,10 +9,7 @@ import {
   Inconsolata_300Light,
   Inconsolata_400Regular,
   Inconsolata_500Medium,
-  Inconsolata_600SemiBold,
   Inconsolata_700Bold,
-  Inconsolata_800ExtraBold,
-  Inconsolata_900Black,
 } from "@expo-google-fonts/inconsolata";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
