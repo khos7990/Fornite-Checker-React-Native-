@@ -100,7 +100,7 @@ export default function ModalComponent({
                 <Text
                   style={{
                     position: "absolute",
-                    bottom: 20,
+                    bottom: 10,
                     textAlign: "center",
                     fontSize: 15,
                     color: "white",
