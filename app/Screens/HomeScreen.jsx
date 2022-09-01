@@ -38,18 +38,24 @@ export default function LoginScreen({ navigation }) {
     items();
   }, [dailyItems]);
 
-  //better way of doing this and check if it works with more than 2 items
+  // check if it works with more than 2 items
 
   useEffect(() => {
     let array = [];
-    for (let i = 0; i < ItemsMoreThanOne.length; i++) {
-      if (ItemsMoreThanOne[i].set.value === ItemsMoreThanOne[i++].set.value) {
-        let arr = [];
-        arr.push(ItemsMoreThanOne[i], ItemsMoreThanOne[i - 1]);
-        array.push(arr);
-      }
-    }
-    setitemSets(array);
+    // for (let i = 1; i < ItemsMoreThanOne.length; i++) {
+    let items = ItemsMoreThanOne.filter(
+      (item) => item.set.value === item.set.value
+    );
+
+    // if (ItemsMoreThanOne[i].set.value === ItemsMoreThanOne[i++].set.value) {
+    //   let arr = [];
+    //   arr.push(ItemsMoreThanOne[i], ItemsMoreThanOne[i - 1]);
+    //   console.log(arr);
+    //   array.push(arr);
+    // }
+    // }
+
+    setitemSets(items);
   }, [ItemsMoreThanOne]);
   const getNewsData = async () => {
     try {
@@ -235,7 +241,7 @@ export default function LoginScreen({ navigation }) {
                 fontFamily: "Inconsolata_700Bold",
               }}
             >
-              Dailys
+              Daily Items
             </Text>
           </View>
           <View
@@ -300,34 +306,34 @@ export default function LoginScreen({ navigation }) {
               }}
             >
               {itemSets.map((item) => {
-                return item.map((set) => {
-                  return (
-                    <View>
-                      <Text
+                // return item.map((set) => {
+                return (
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        color: "white",
+                        textAlign: "center",
+                        fontFamily: "Inconsolata_300Light",
+                      }}
+                    >
+                      {item.name}
+                    </Text>
+                    <TouchableOpacity
+                      onPress={(e) => getItemSetClicked(e, item.name)}
+                    >
+                      <Image
+                        source={{ uri: item.images.smallIcon }}
                         style={{
-                          fontSize: 18,
-                          color: "white",
-                          textAlign: "center",
-                          fontFamily: "Inconsolata_300Light",
+                          height: 80,
+                          width: 90,
+                          resizeMode: "center",
                         }}
-                      >
-                        {set.name}
-                      </Text>
-                      <TouchableOpacity
-                        onPress={(e) => getItemSetClicked(e, set.name)}
-                      >
-                        <Image
-                          source={{ uri: set.images.smallIcon }}
-                          style={{
-                            height: 80,
-                            width: 90,
-                            resizeMode: "center",
-                          }}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  );
-                });
+                      />
+                    </TouchableOpacity>
+                  </View>
+                );
+                // });
               })}
             </View>
           </View>
