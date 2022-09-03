@@ -13,6 +13,7 @@ import {
 } from "@expo-google-fonts/inconsolata";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
+import Featured from "./app/Screens/FeaturedScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,10 +38,12 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <PaperProvider theme={theme}>
-        <NavigationContainer>
-          <BottomNav />
-        </NavigationContainer>
+        <Featured />
       </PaperProvider>
     </SafeAreaProvider>
   );
 }
+
+// <NavigationContainer>
+//   <BottomNav />
+// </NavigationContainer>
