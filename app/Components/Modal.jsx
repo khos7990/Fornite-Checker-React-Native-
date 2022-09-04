@@ -6,7 +6,7 @@ import { Dimensions } from "react-native";
 const { width, height } = Dimensions.get("screen");
 
 const modalW = width / 1.5;
-const modalH = height / 3;
+const modalH = height / 2.5;
 
 export default function ModalComponent({
   open,
@@ -82,61 +82,72 @@ export default function ModalComponent({
                   Type: {item.type.displayValue}{" "}
                 </Text>
               </View>
-              <Image
-                source={{ uri: item.images.smallIcon }}
+              <View
                 style={{
-                  width: 80,
-                  height: 80,
-                  borderWidth: 0.5,
-                  borderColor: "white",
-                  marginBottom: 8,
-                }}
-              />
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 20,
-                  color: "white",
-                  fontFamily: "Inconsolata_400Regular",
+                  height: 200,
+
+                  alignItems: "center",
                 }}
               >
-                Rarity: {item.rarity.displayValue}
-              </Text>
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 15,
-                  color: "white",
-                  fontFamily: "Inconsolata_300Light",
-                }}
-              >
-                Chapter: {item.introduction.chapter}{" "}
+                <Image
+                  source={{ uri: item.images.smallIcon }}
+                  style={{
+                    width: 80,
+                    height: 80,
+                    borderWidth: 0.5,
+                    borderColor: "white",
+                    marginBottom: 8,
+                  }}
+                />
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 20,
+                    color: "white",
+                    fontFamily: "Inconsolata_400Regular",
+                  }}
+                >
+                  Rarity: {item.rarity.displayValue}
+                </Text>
                 <Text
                   style={{
                     textAlign: "center",
                     fontSize: 15,
                     color: "white",
                     fontFamily: "Inconsolata_300Light",
+
+                    position: item.set ? null : "absolute",
+                    bottom: item.set ? null : 0,
                   }}
                 >
-                  Season: {item.introduction.season}{" "}
+                  Chapter: {item.introduction.chapter}{" "}
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 15,
+                      color: "white",
+                      fontFamily: "Inconsolata_300Light",
+                    }}
+                  >
+                    Season: {item.introduction.season}{" "}
+                  </Text>
                 </Text>
-              </Text>
-              {item.set ? (
-                <Text
-                  style={{
-                    position: "absolute",
-                    bottom: 10,
-                    textAlign: "center",
-                    fontSize: 15,
-                    color: "white",
-                    fontFamily: "Inconsolata_300Light",
-                  }}
-                >
-                  {" "}
-                  {item.set.text}{" "}
-                </Text>
-              ) : null}
+                {item.set ? (
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: 10,
+                      textAlign: "center",
+                      fontSize: 15,
+                      color: "white",
+                      fontFamily: "Inconsolata_300Light",
+                    }}
+                  >
+                    {" "}
+                    {item.set.text}{" "}
+                  </Text>
+                ) : null}
+              </View>
             </View>
           </ImageBackground>
         ))}

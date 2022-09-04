@@ -9,6 +9,8 @@ import {
   FlatList,
 } from "react-native";
 import { useEffect, useState } from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import ModalComponent from "../Components/Modal";
 
 const { width, height } = Dimensions.get("screen");
 const imageW = width * 0.7;
@@ -17,6 +19,9 @@ const imageH = imageW * 1.54;
 export default function FeaturedScreen() {
   const [featuredData, setFeaturedData] = useState([]);
   const [bundles, setBundles] = useState();
+  const [openModal, setOpenModal] = useState(false);
+  const [itemSelected, setitemSelected] = useState([]);
+  const [itemRarity, setitemRarity] = useState();
 
   useEffect(() => {
     getFeature();
@@ -52,6 +57,26 @@ export default function FeaturedScreen() {
     setBundles(results);
     console.log(results);
   };
+
+  const getFeaturedEvent = (e, name, bundle) => {
+    setOpenModal(!openModal);
+    const itemClicked = bundle.items.filter((item) => item.name === name);
+    setitemSelected(itemClicked);
+    console.log(itemClicked);
+    if (itemClicked[0].rarity.displayValue === "Uncommon") {
+      setitemRarity("#016604");
+    } else if (itemClicked[0].rarity.displayValue === "Rare") {
+      setitemRarity("#008dd4");
+    } else if (itemClicked[0].rarity.displayValue === "Epic") {
+      setitemRarity("#8a2be2");
+    } else if (itemClicked[0].rarity.displayValue === "Legendary") {
+      setitemRarity("#de6e0e");
+    } else {
+      setitemRarity("#40464d");
+    }
+  };
+
+  const hideModal = () => setOpenModal(false);
 
   return (
     <View style={styles.container}>
@@ -127,25 +152,36 @@ export default function FeaturedScreen() {
                         {item.finalPrice}
                       </Text>
                     </View>
-
-                    {item.items.map((item) => (
+                    <ModalComponent
+                      open={openModal}
+                      close={hideModal}
+                      itemSelected={itemSelected}
+                      itemRarity={itemRarity}
+                    />
+                    {item.items.map((i) => (
                       <View
                         style={{
                           width: 150,
                           height: 115,
                           borderWidth: 1,
-                          borderColor: "green",
+                          borderColor: "white",
                           alignItems: "center",
                           justifyContent: "center",
+                          borderRadius: 20,
+                          margin: 5,
                         }}
                       >
                         <Text style={{ color: "white", fontSize: 15 }}>
-                          {item.name}
+                          {i.name}
                         </Text>
-                        <Image
-                          source={{ uri: item.images.smallIcon }}
-                          style={{ width: 100, height: 80 }}
-                        />
+                        <TouchableOpacity
+                          onPress={(e) => getFeaturedEvent(e, i.name, item)}
+                        >
+                          <Image
+                            source={{ uri: i.images.smallIcon }}
+                            style={{ width: 100, height: 80 }}
+                          />
+                        </TouchableOpacity>
                       </View>
                     ))}
                   </View>
