@@ -85,6 +85,8 @@ export default function FeaturedScreen() {
                 border: "2px solid orange",
                 flexDirection: "row",
                 flexWrap: "wrap",
+                borderWidth: 1,
+                borderColor: "green",
               }}
             >
               {/* {bundles.map((data) => {
@@ -119,34 +121,54 @@ export default function FeaturedScreen() {
                       style={{
                         width: width,
                         height: height,
-                        borderWidth: 1,
-                        borderColor: "orange",
+                        // borderWidth: 1,
+                        // borderColor: "orange",
                         alignItems: "center",
+                        justifyContent: "center",
                         flexDirection: "row",
                         flexWrap: "wrap",
                       }}
                     >
-                      <Text
+                      <View
                         style={{
-                          color: "white",
-                          fontSize: 40,
-                          fontFamily: "Inconsolata_700Bold",
-                          position: "absolute",
-                          top: 0,
+                          height: 50,
+                          width: width,
+
+                          alignItems: "center",
                         }}
                       >
-                        {item.section.name}
-                      </Text>
+                        <Text
+                          style={{
+                            color: "white",
+                            fontSize: 25,
+                            fontFamily: "Inconsolata_700Bold",
+                            position: "absolute",
+                            top: 0,
+                            textAlign: "center",
+                          }}
+                        >
+                          {item.section.name}
+                        </Text>
+                      </View>
 
                       {item.items.map((item) => (
                         <View
                           style={{
-                            width: 200,
-                            height: 200,
-                            border: "2px solid green",
+                            width: 150,
+                            height: 150,
+                            borderWidth: 1,
+                            borderColor: "green",
+                            alignItems: "center",
+                            justifyContent: "center",
                           }}
                         >
-                          <Text>{item.name}</Text>
+                          <Text style={{ color: "white", fontSize: 15 }}>
+                            {item.name}
+                          </Text>
+                          <Image
+                            source={{ uri: item.images.smallIcon }}
+                            style={{ width: 100, height: 80 }}
+                          />
                         </View>
                       ))}
                     </View>
