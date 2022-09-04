@@ -55,7 +55,6 @@ export default function FeaturedScreen() {
   const getBundle = () => {
     const results = featuredData.filter((data) => data.bundle !== null);
     setBundles(results);
-    console.log(results);
   };
 
   const getFeaturedEvent = (e, name, bundle) => {
@@ -114,8 +113,6 @@ export default function FeaturedScreen() {
                     style={{
                       width: width,
                       height: height,
-                      borderWidth: 1,
-                      borderColor: "yellow",
                       justifyContent: "center",
                       alignItems: "center",
                       flexDirection: "row",
@@ -143,14 +140,30 @@ export default function FeaturedScreen() {
                       <Text style={{ fontSize: 20, color: "white" }}>
                         {item.bundle.name}
                       </Text>
-                      <Text
+                      <View
                         style={{
-                          fontSize: 20,
-                          color: "white",
+                          width: 100,
+                          marginTop: 15,
+                          flexDirection: "row",
+                          justifyContent: "space-evenly",
                         }}
                       >
-                        {item.finalPrice}
-                      </Text>
+                        <Image
+                          source={require("../../assets/icons/vbucks.png")}
+                          style={{
+                            height: 25,
+                            width: 25,
+                          }}
+                        />
+                        <Text
+                          style={{
+                            fontSize: 20,
+                            color: "white",
+                          }}
+                        >
+                          {item.finalPrice}
+                        </Text>
+                      </View>
                     </View>
                     <ModalComponent
                       open={openModal}
@@ -171,7 +184,13 @@ export default function FeaturedScreen() {
                           margin: 5,
                         }}
                       >
-                        <Text style={{ color: "white", fontSize: 15 }}>
+                        <Text
+                          style={{
+                            color: "white",
+                            fontSize: 16,
+                            fontFamily: "Inconsolata_300Light",
+                          }}
+                        >
                           {i.name}
                         </Text>
                         <TouchableOpacity
