@@ -1,3 +1,28 @@
+
+  <View
+  style={{
+    width: width,
+    height: 200,
+    border: "2px solid yellow",
+    borderWidth: 1,
+    borderColor: "yellow",
+  }}
+>
+  <Text
+    style={{
+      color: "white",
+      fontSize: 25,
+      textAlign: "center",
+    }}
+  >
+    {data.section.name}
+  </Text>
+
+  <View></View>
+</View>
+);
+})}
+</View>
 <FlatList
   data={data.items}
   keyExtractor={(item) => item.name}

@@ -78,108 +78,80 @@ export default function FeaturedScreen() {
             Featured
           </Text>
           {bundles ? (
-            <View
-              style={{
-                height: 1000,
-                width: width,
-                border: "2px solid orange",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                borderWidth: 1,
-                borderColor: "green",
-              }}
-            >
-              {/* {bundles.map((data) => {
-                return ( */}
-              {/* <View
-                style={{
-                  width: width,
-                  height: height,
-                  border: "2px solid yellow",
-                  borderWidth: 1,
-                  borderColor: "yellow",
-                }}
-              > */}
-              {/* <Text
-                      style={{
-                        color: "white",
-                        fontSize: 25,
-                        textAlign: "center",
-                      }}
-                    >
-                      {data.section.name}
-                    </Text> */}
-
-              <FlatList
-                data={bundles}
-                keyExtractor={(item) => item.name}
-                horizontal
-                pagingEnabled
-                renderItem={({ item }) => {
-                  return (
+            <FlatList
+              data={bundles}
+              keyExtractor={(item) => item.name}
+              horizontal
+              pagingEnabled
+              renderItem={({ item }) => {
+                return (
+                  <View
+                    style={{
+                      width: width,
+                      height: height,
+                      borderWidth: 1,
+                      borderColor: "yellow",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexDirection: "row",
+                      flexWrap: "wrap",
+                    }}
+                  >
                     <View
                       style={{
+                        height: 70,
                         width: width,
-                        height: height,
-                        // borderWidth: 1,
-                        // borderColor: "orange",
+                        marginBottom: 30,
                         alignItems: "center",
                         justifyContent: "center",
-                        flexDirection: "row",
-                        flexWrap: "wrap",
                       }}
                     >
-                      <View
+                      <Text
                         style={{
-                          height: 50,
-                          width: width,
-
-                          alignItems: "center",
+                          color: "white",
+                          fontSize: 25,
+                          fontFamily: "Inconsolata_700Bold",
                         }}
                       >
-                        <Text
-                          style={{
-                            color: "white",
-                            fontSize: 25,
-                            fontFamily: "Inconsolata_700Bold",
-                            position: "absolute",
-                            top: 0,
-                            textAlign: "center",
-                          }}
-                        >
-                          {item.section.name}
-                        </Text>
-                      </View>
-
-                      {item.items.map((item) => (
-                        <View
-                          style={{
-                            width: 150,
-                            height: 150,
-                            borderWidth: 1,
-                            borderColor: "green",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <Text style={{ color: "white", fontSize: 15 }}>
-                            {item.name}
-                          </Text>
-                          <Image
-                            source={{ uri: item.images.smallIcon }}
-                            style={{ width: 100, height: 80 }}
-                          />
-                        </View>
-                      ))}
+                        {item.section.name}
+                      </Text>
+                      <Text style={{ fontSize: 20, color: "white" }}>
+                        {item.bundle.name}
+                      </Text>
+                      <Text
+                        style={{
+                          fontSize: 20,
+                          color: "white",
+                        }}
+                      >
+                        {item.finalPrice}
+                      </Text>
                     </View>
-                  );
-                }}
-              />
 
-              {/* </View> */}
-              {/* ); */}
-              {/* })} */}
-            </View>
+                    {item.items.map((item) => (
+                      <View
+                        style={{
+                          width: 150,
+                          height: 115,
+                          borderWidth: 1,
+                          borderColor: "green",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text style={{ color: "white", fontSize: 15 }}>
+                          {item.name}
+                        </Text>
+                        <Image
+                          source={{ uri: item.images.smallIcon }}
+                          style={{ width: 100, height: 80 }}
+                        />
+                      </View>
+                    ))}
+                  </View>
+                );
+              }}
+            />
           ) : null}
         </View>
       </ImageBackground>

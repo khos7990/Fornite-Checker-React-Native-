@@ -306,7 +306,6 @@ export default function LoginScreen({ navigation }) {
               }}
             >
               {itemSets.map((item) => {
-                // return item.map((set) => {
                 return (
                   <View>
                     <Text
@@ -333,7 +332,6 @@ export default function LoginScreen({ navigation }) {
                     </TouchableOpacity>
                   </View>
                 );
-                // });
               })}
             </View>
           </View>
