@@ -259,6 +259,7 @@ export default function LoginScreen({ navigation }) {
                   border: "2px solid red",
                   width: 120,
                   height: 120,
+                  margin: 2,
                 }}
               >
                 <Text

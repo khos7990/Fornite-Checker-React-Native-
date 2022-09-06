@@ -38,12 +38,10 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <PaperProvider theme={theme}>
-        <Featured />
+        <NavigationContainer>
+          <BottomNav />
+        </NavigationContainer>
       </PaperProvider>
     </SafeAreaProvider>
   );
 }
-
-// <NavigationContainer>
-//   <BottomNav />
-// </NavigationContainer>
