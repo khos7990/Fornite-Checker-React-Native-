@@ -25,7 +25,7 @@ export default function ModalComponent({
         style={{
           justifyContent: "center",
           alignItems: "center",
-          opacity: 0.5,
+          opacity: 1,
           shadowOpacity: 1,
         }}
       >

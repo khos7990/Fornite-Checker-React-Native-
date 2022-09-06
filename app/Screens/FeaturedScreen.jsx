@@ -55,6 +55,7 @@ export default function FeaturedScreen() {
   const getBundle = () => {
     const results = featuredData.filter((data) => data.bundle !== null);
     setBundles(results);
+    console.log(results);
   };
 
   const getFeaturedEvent = (e, name, bundle) => {
@@ -76,6 +77,8 @@ export default function FeaturedScreen() {
   };
 
   const hideModal = () => setOpenModal(false);
+
+  const epic = require("../../assets/rarityColors/epic.jpg");
 
   return (
     <View style={styles.container}>
@@ -128,15 +131,6 @@ export default function FeaturedScreen() {
                         justifyContent: "center",
                       }}
                     >
-                      <Text
-                        style={{
-                          color: "white",
-                          fontSize: 25,
-                          fontFamily: "Inconsolata_700Bold",
-                        }}
-                      >
-                        {item.section.name}
-                      </Text>
                       <Text style={{ fontSize: 20, color: "white" }}>
                         {item.bundle.name}
                       </Text>
@@ -164,6 +158,15 @@ export default function FeaturedScreen() {
                           {item.finalPrice}
                         </Text>
                       </View>
+                      <Image
+                        source={{ uri: item.bundle.image }}
+                        style={{
+                          height: 50,
+                          width: 50,
+                          position: "absolute",
+                          left: 0,
+                        }}
+                      />
                     </View>
                     <ModalComponent
                       open={openModal}
@@ -174,9 +177,9 @@ export default function FeaturedScreen() {
                     {item.items.map((i) => (
                       <View
                         style={{
-                          width: 150,
+                          width: 170,
                           height: 115,
-                          borderWidth: 1,
+                          borderWidth: 0.5,
                           borderColor: "white",
                           alignItems: "center",
                           justifyContent: "center",
@@ -198,7 +201,10 @@ export default function FeaturedScreen() {
                         >
                           <Image
                             source={{ uri: i.images.smallIcon }}
-                            style={{ width: 100, height: 80 }}
+                            style={{
+                              width: 100,
+                              height: 80,
+                            }}
                           />
                         </TouchableOpacity>
                       </View>
