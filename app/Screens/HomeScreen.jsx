@@ -299,7 +299,7 @@ export default function LoginScreen({ navigation }) {
                 alignItems: "center",
                 width: 375,
                 height: 100,
-                borderWidth: 2,
+                borderWidth: 1,
                 borderBottomWidth: 0,
                 shadowColor: "orange",
                 shadowOpacity: 5,
@@ -327,7 +327,7 @@ export default function LoginScreen({ navigation }) {
                         style={{
                           height: 80,
                           width: 90,
-                          resizeMode: "center",
+                          resizeMode: "contain",
                         }}
                       />
                     </TouchableOpacity>
