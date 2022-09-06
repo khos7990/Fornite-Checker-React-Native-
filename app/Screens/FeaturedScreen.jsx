@@ -142,7 +142,7 @@ export default function FeaturedScreen() {
                       </Text>
                       <View
                         style={{
-                          width: 100,
+                          width: 200,
                           marginTop: 15,
                           flexDirection: "row",
                           justifyContent: "space-evenly",
@@ -162,9 +162,18 @@ export default function FeaturedScreen() {
                             fontFamily: "Inconsolata_700Bold",
                           }}
                         >
-                          {item.finalPrice}
+                          {item.finalPrice} {item.bundle.info}
                         </Text>
                       </View>
+                      <Text
+                        style={{
+                          fontSize: 15,
+                          color: "yellow",
+                          fontFamily: "Inconsolata_500Medium",
+                        }}
+                      >
+                        {item.banner.value}
+                      </Text>
                       <Image
                         source={{ uri: item.bundle.image }}
                         style={{
