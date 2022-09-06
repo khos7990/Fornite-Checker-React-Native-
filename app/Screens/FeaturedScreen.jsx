@@ -131,7 +131,13 @@ export default function FeaturedScreen() {
                         justifyContent: "center",
                       }}
                     >
-                      <Text style={{ fontSize: 20, color: "white" }}>
+                      <Text
+                        style={{
+                          fontSize: 20,
+                          color: "white",
+                          fontFamily: "Inconsolata_500Medium",
+                        }}
+                      >
                         {item.bundle.name}
                       </Text>
                       <View
@@ -153,6 +159,7 @@ export default function FeaturedScreen() {
                           style={{
                             fontSize: 20,
                             color: "white",
+                            fontFamily: "Inconsolata_700Bold",
                           }}
                         >
                           {item.finalPrice}
@@ -164,7 +171,7 @@ export default function FeaturedScreen() {
                           height: 50,
                           width: 50,
                           position: "absolute",
-                          left: 0,
+                          left: 20,
                         }}
                       />
                     </View>
